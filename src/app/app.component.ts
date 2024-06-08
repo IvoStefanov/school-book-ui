@@ -10,4 +10,18 @@ import { RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'school-book-ui';
+
+  // fetch('http://localhost:3000/auth/login', {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: '{"username": "admin", "password": "admin"}'
+  // });
+
+  // fetch('http://localhost:3000/profile', {
+  //   headers: {
+  //     'Authorization': 'bearer ...'
+  //   }
+  // });
 }
