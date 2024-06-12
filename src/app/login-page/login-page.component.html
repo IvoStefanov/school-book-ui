@@ -7,3 +7,6 @@
   <br>
   <button type="submit" [disabled]="!loginForm.valid">Login</button>
 </form>
+<div *ngIf="error">{{ error }}</div>
+
+<app-home-page></app-home-page>
