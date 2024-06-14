@@ -1,24 +1,22 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { LoginService } from '../login-page/login-page.service';
 import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-home-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.css'
 })
-export class HomePageComponent implements OnInit {
+export class HomePageComponent {
   public username = '';
 
-  constructor(private loginService: LoginService) {}
+  constructor(public loginService: LoginService) {}
 
-  public ngOnInit(): void {
-      this.loginService.user.subscribe(user => {
-        this.username = user.username;
-        // console.log(user)
-      });
+  public logout(): void {
+    this.loginService.logout();
   }
 
 }
