@@ -1,1 +1,30 @@
-<p>schools works!</p>
+<div id="header">
+    <div>Name</div>
+    <div>Address</div>
+    <div>Contact</div>
+</div>
+<div id="school-list">
+    <div *ngFor="let school of schools">
+        <div id="school-wrapper">
+            <div>{{ school.name }}</div>
+            <div>{{ school.address }}</div>
+            <div>{{ school.contact }}</div>
+        </div>
+    </div>
+</div>
+<button (click)="createMode = true">Create new school</button>
+<div *ngIf="createMode" id="create-school">
+    <form (ngSubmit)="createSchool(createSchoolFrom)" #createSchoolFrom="ngForm">
+        <label>Name: </label>
+        <input ngModel name="schoolName" required>
+        <br>
+        <label>Address: </label>
+        <input ngModel name="schoolAddress" required>
+        <br>
+        <label>Contact: </label>
+        <input ngModel name="schoolContact" required>
+        <button type="submit" [disabled]="!createSchoolFrom.valid">Create</button>
+        <button (click)="cancelCreation()">Cancel</button>
+      </form>
+      <div *ngIf="error">{{ error }}</div>
+</div>

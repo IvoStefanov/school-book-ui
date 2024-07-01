@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit{
     this.loginService.login(form.value.username, form.value.password).subscribe(res => { 
     this.user = res;
     // save token to local storage here??
-    this.router.navigate(['/home']);
+    this.router.navigate(['/home/admin']);
     },
       error => this.error = error);
     form.reset();

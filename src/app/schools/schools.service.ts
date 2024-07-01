@@ -23,6 +23,18 @@ export class SchoolsService {
      )
   }
 
+  public createSchool(name: string, address: string, contact: string): Observable<any> {
+    return this.http.post(
+      'http://localhost:3000/create-school',
+      {name: name, address: address, contact: contact}
+    ).pipe(
+      // catchError(this.handleError),
+      map(res => {
+        console.log(res)
+      })
+    )
+  }
+
   // private handleError(error: HttpErrorResponse): Observable<any> {
     // let message = 'An unknown error occured!';
     // if(!error.error || !error.error.error) {
