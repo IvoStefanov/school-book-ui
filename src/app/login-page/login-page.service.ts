@@ -35,7 +35,7 @@ export class LoginService {
     this.user.next(loadedUser);
   }
 
-  // autoLogout + token expire 
+  // autoLogout + token expire
 
   public logout(): void {
     this.user.next(null);

@@ -26,10 +26,10 @@ export class LoginPageComponent implements OnInit{
   }
 
   public login(form: NgForm): void{
-    this.loginService.login(form.value.username, form.value.password).subscribe(res => { 
+    this.loginService.login(form.value.username, form.value.password).subscribe(res => {
     this.user = res;
     // save token to local storage here??
-    this.router.navigate(['/home/admin']);
+    this.router.navigate(['/home']);
     },
       error => this.error = error);
     form.reset();

@@ -1,37 +1,42 @@
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, Observable, switchMap } from 'rxjs';
 import { School } from './school';
-import { HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { User } from '../login-page/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SchoolsService {
-  http: any;
 
-  constructor() { }
+  constructor(private http: HttpClient, private router: Router) {}
 
   public getSchools(): Observable<School[]> {
-    return this.http.get(
-       'http://localhost:3000/schools'
-     ).pipe(
-      //  catchError(this.handleError),
-       map((res: School) => {
-        let school: School = { id: res.id, name: res.name, address: res.address, contact: res.contact};
-        return school;
-      })
-     )
+    const token: string = JSON.parse(localStorage.getItem('userData')).token;
+    return this.http.get<School[]>(
+       'http://localhost:3000/schools',
+       {headers: {"Authorization": "Bearer " + token}}
+    )
+    // .pipe(
+    // //  catchError(this.handleError),
+    //   switchMap(res =>
+    //     res.map(school => {
+    //       id: school.id;
+    //       name: school.name;
+    //       address: school.address;
+    //       contact: school.contact
+    //     })
+    //   )
+    // )
   }
 
-  public createSchool(name: string, address: string, contact: string): Observable<any> {
+  public createSchool(name: string, address: string, contact: string) {
+    const token: string = JSON.parse(localStorage.getItem('userData')).token;
     return this.http.post(
       'http://localhost:3000/create-school',
-      {name: name, address: address, contact: contact}
-    ).pipe(
-      // catchError(this.handleError),
-      map(res => {
-        console.log(res)
-      })
+      {name: name, address: address, contact: contact},
+      {headers: {"Authorization": "Bearer" + token}}
     )
   }
 
