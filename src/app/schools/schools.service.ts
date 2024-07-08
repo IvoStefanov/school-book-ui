@@ -36,7 +36,7 @@ export class SchoolsService {
     return this.http.post(
       'http://localhost:3000/create-school',
       {name: name, address: address, contact: contact},
-      {headers: {"Authorization": "Bearer" + token}}
+      {headers: {"Authorization": "Bearer " + token}}
     )
   }
 
