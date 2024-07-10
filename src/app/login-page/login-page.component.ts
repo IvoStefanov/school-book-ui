@@ -1,8 +1,7 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { LoginService } from './login-page.service';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { HomePageComponent } from '../home-page/home-page.component';

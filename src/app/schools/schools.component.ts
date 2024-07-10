@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { School } from './school';
 import { SchoolsService } from './schools.service';
 import { Router } from '@angular/router';
@@ -13,10 +13,10 @@ import { FormsModule, NgForm } from '@angular/forms';
   templateUrl: './schools.component.html',
   styleUrl: './schools.component.css'
 })
-export class SchoolsComponent {
+export class SchoolsComponent implements OnInit {
   public error = '';
   public schools: School[];
-  public createMode = true;
+  public createMode = false;
 
   constructor(public schoolsService: SchoolsService, public router: Router) {}
 
@@ -27,7 +27,7 @@ export class SchoolsComponent {
   }
 
   public createSchool(form: NgForm): void {
-    this.schoolsService.createSchool(form.value.name, form.value.address, form.value.contact).subscribe({
+    this.schoolsService.createSchool(form.value.schoolName, form.value.schoolAddress, form.value.schoolContact).subscribe({
       next: res => console.log(res),
       error: err => this.error = err
     })
