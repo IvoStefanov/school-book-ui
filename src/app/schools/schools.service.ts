@@ -40,6 +40,24 @@ export class SchoolsService {
     )
   }
 
+  public updateSchool(id: number, name: string, address: string, contact: string) {
+    const token: string = JSON.parse(localStorage.getItem('userData')).token;
+    return this.http.post(
+      'http://localhost:3000/update-school',
+      {id: id, name: name, address: address, contact: contact},
+      {headers: {"Authorization": "Bearer " + token}}
+    )
+  }
+
+  public removeSchool(id: number) {
+    const token: string = JSON.parse(localStorage.getItem('userData')).token;
+    return this.http.post(
+      'http://localhost:3000/update-school',
+      {id: id},
+      {headers: {"Authorization": "Bearer " + token}}
+    )
+  }
+
   // private handleError(error: HttpErrorResponse): Observable<any> {
     // let message = 'An unknown error occured!';
     // if(!error.error || !error.error.error) {

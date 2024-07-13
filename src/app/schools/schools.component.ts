@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { School } from './school';
 import { SchoolsService } from './schools.service';
 import { Router } from '@angular/router';
@@ -17,10 +17,16 @@ export class SchoolsComponent implements OnInit {
   public error = '';
   public schools: School[];
   public createMode = false;
+  public editMode = false;
 
   constructor(public schoolsService: SchoolsService, public router: Router) {}
 
+
   public ngOnInit(): void {
+    this.getSchools();
+  }
+
+  public getSchools(): void {
     this.schoolsService.getSchools().subscribe(
       schools => this.schools = schools
     );
@@ -28,14 +34,30 @@ export class SchoolsComponent implements OnInit {
 
   public createSchool(form: NgForm): void {
     this.schoolsService.createSchool(form.value.schoolName, form.value.schoolAddress, form.value.schoolContact).subscribe({
-      next: res => console.log(res),
+      next: res => this.getSchools(),
       error: err => this.error = err
     })
     form.reset();
     this.createMode = false;
   }
 
+  public editSchool(form: NgForm, schoolId: number): void {
+    this.schoolsService.updateSchool(schoolId, form.value.schoolName, form.value.schoolAddress, form.value.schoolContact).subscribe({
+      next: res => this.getSchools(),
+      error: err => this.error = err
+    })
+    this.editMode = false;
+  }
+
   public cancelCreation(): void {
     this.createMode = false;
+  }
+
+  public remove(id: number): void {
+    this.schoolsService.removeSchool(id).subscribe(() => this.getSchools());
+  }
+
+  public edit(id: number): void {
+    this.editMode = true;
   }
 }
