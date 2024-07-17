@@ -18,6 +18,7 @@ export class SchoolsComponent implements OnInit {
   public schools: School[];
   public createMode = false;
   public editMode = false;
+  public currentEditSchool: School = null;
 
   constructor(public schoolsService: SchoolsService, public router: Router) {}
 
@@ -57,7 +58,8 @@ export class SchoolsComponent implements OnInit {
     this.schoolsService.removeSchool(id).subscribe(() => this.getSchools());
   }
 
-  public edit(id: number): void {
+  public edit(school: School): void {
     this.editMode = true;
+    this.currentEditSchool = school;
   }
 }

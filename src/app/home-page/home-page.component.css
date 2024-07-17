@@ -1,0 +1,18 @@
+#header {
+    display: flex;
+    justify-content: space-between;
+    height: 65px;
+    background-color: blanchedalmond;
+}
+
+#userLogout {
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    font-size: 20px;
+    height: 35px;
+    border: 1px solid rgb(248, 174, 113);
+    background-color: rgb(248, 174, 113);
+}

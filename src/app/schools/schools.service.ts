@@ -52,7 +52,7 @@ export class SchoolsService {
   public removeSchool(id: number) {
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
     return this.http.post(
-      'http://localhost:3000/update-school',
+      'http://localhost:3000/remove-school',
       {id: id},
       {headers: {"Authorization": "Bearer " + token}}
     )

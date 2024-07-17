@@ -7,36 +7,33 @@
     <div>Actions</div>
 </div>
     <div id="school-wrapper" *ngFor="let school of schools">
-      <div *ngIf="!editMode">
+      <div>
         <div>{{ school.id }}</div>
         <div>{{ school.name }}</div>
         <div>{{ school.address }}</div>
         <div>{{ school.contact }}</div>
         <div>
-          <button (click)="edit(school.id)" class="action-button"><span class="material-icons">edit</span></button>
+          <button (click)="edit(school)" class="action-button"><span class="material-icons">edit</span></button>
           <button (click)="remove(school.id)" class="action-button"><span class="material-icons">delete</span></button>
         </div>
       </div>
-
-
-
-
     </div>
     <div *ngIf="editMode" id="edit-school">
-      <form (ngSubmit)="editSchool(editSchoolFrom, school.id)" #editSchoolFrom="ngForm">
-          <label>Name: </label>
-          <input name="schoolName" required [(ngModel)]="school.name">
-          <br>
-          <label>Address: </label>
-          <input ngModel name="schoolAddress" required  [(ngModel)]="school.address">
-          <br>
-          <label>Contact: </label>
-          <input ngModel name="schoolContact" required  [(ngModel)]="school.contact">
-          <button class="action-button" type="submit" [disabled]="!editSchoolFrom.valid"><span class="material-icons">check</span></button>
-          <button class="action-button" (click)="editMode = false"><span class="material-icons">close</span></button>
-        </form>
-        <div *ngIf="error">{{ error }}</div>
+      <form (ngSubmit)="editSchool(editSchoolFrom, currentEditSchool.id)" #editSchoolFrom="ngForm">
+        <label>Name: </label>
+        <input name="schoolName" required [(ngModel)]="currentEditSchool.name">
+        <br>
+        <label>Address: </label>
+        <input ngModel name="schoolAddress" required  [(ngModel)]="currentEditSchool.address">
+        <br>
+        <label>Contact: </label>
+        <input ngModel name="schoolContact" required  [(ngModel)]="currentEditSchool.contact">
+        <button class="action-button" type="submit" [disabled]="!editSchoolFrom.valid"><span class="material-icons">check</span></button>
+        <button class="action-button" (click)="editMode = false"><span class="material-icons">close</span></button>
+      </form>
+      <div *ngIf="error">{{ error }}</div>
   </div>
+    
 </div>
 <button class="action-button" (click)="createMode = true"><span class="material-icons">add</span> add school</button>
 <div *ngIf="createMode" id="create-school">
