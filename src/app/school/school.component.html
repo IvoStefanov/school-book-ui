@@ -1,0 +1,31 @@
+<div *ngIf="school">
+  <h3>{{ school.name }}</h3>
+  <div>{{ school.address }}</div>
+  <div>{{ school.contact }}</div>
+  <div *ngIf="principle">
+    <h3>{{ principle.name }}</h3>
+    <div>{{ principle.address }}</div>
+    <div>{{ principle.contact }}</div>
+  </div>
+  <div *ngIf="!principle">
+    <div *ngIf="error">{{ error }}</div>
+    <form (ngSubmit)="createPrinciple(createPrincipleFrom)" #createPrincipleFrom="ngForm">
+      <label>Name: </label>
+      <input ngModel name="principleName" required>
+      <br>
+      <label>Address: </label>
+      <input ngModel name="principleAddress" required>
+      <br>
+      <label>Contact: </label>
+      <input ngModel name="principleContact" required>
+      <br>
+      <label>Username: </label>
+      <input ngModel name="principleUsername" required>
+      <br>
+      <label>Password: </label>
+      <input ngModel name="principlePassword" required>
+      <br>
+      <button type="submit" [disabled]="!createPrincipleFrom.valid">Create</button>
+    </form>
+  </div>
+</div>

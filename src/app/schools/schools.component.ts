@@ -1,15 +1,16 @@
-import { Component, OnChanges, OnInit } from '@angular/core';
-import { School } from './school';
+import { Component, OnInit } from '@angular/core';
+import { School } from '../school/school';
 import { SchoolsService } from './schools.service';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-schools',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterLink],
   templateUrl: './schools.component.html',
   styleUrl: './schools.component.css'
 })

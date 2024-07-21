@@ -9,7 +9,7 @@
     <div id="school-wrapper" *ngFor="let school of schools">
       <div>
         <div>{{ school.id }}</div>
-        <div>{{ school.name }}</div>
+        <a [routerLink]="'/school/' + school.name">{{ school.name }}</a>
         <div>{{ school.address }}</div>
         <div>{{ school.contact }}</div>
         <div>
@@ -33,7 +33,7 @@
       </form>
       <div *ngIf="error">{{ error }}</div>
   </div>
-    
+
 </div>
 <button class="action-button" (click)="createMode = true"><span class="material-icons">add</span> add school</button>
 <div *ngIf="createMode" id="create-school">
