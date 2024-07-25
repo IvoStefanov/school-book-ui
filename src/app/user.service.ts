@@ -13,7 +13,7 @@ export class UserService {
   public createUser(role: Role, username: string, password: string) {
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
     return this.http.post<number>(
-      'http://localhost:3000/create-school',
+      'http://localhost:3000/create-user',
       {role: role, username: username, password: password},
       {headers: {"Authorization": "Bearer " + token}}
     )

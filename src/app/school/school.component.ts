@@ -69,9 +69,11 @@ export class SchoolComponent implements OnInit{
         )
       })
     ).subscribe({
-      next: (principle: Principle) => this.principle = principle,
+      next: (principle: Principle) => {
+        this.principle = principle
+        form.reset();
+      },
       error: err => this.error = err
     })
-    form.reset();
   }
 }
