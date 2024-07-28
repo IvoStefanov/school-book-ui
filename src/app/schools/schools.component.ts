@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
 import { FormsModule, NgForm } from '@angular/forms';
+import { TeacherComponent } from '../teacher/teacher.component';
 
 @Component({
   selector: 'app-schools',

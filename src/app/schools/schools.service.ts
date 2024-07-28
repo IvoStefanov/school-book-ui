@@ -67,7 +67,7 @@ export class SchoolsService {
 
   public getPrincipleBySchool(schoolId: number): Observable<Principle> {
     return this.http.get<Principle>(
-       'http://localhost:3000/principle?school=' + schoolId,
+       'http://localhost:3000/principle-by-school?school=' + schoolId,
     )
   }
 

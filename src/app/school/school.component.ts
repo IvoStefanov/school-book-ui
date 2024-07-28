@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { School } from './school';
 import { SchoolsService } from '../schools/schools.service';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, RouterLink } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { isEmpty } from 'lodash';
@@ -10,11 +10,13 @@ import { Principle } from './principle';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UserService } from '../user.service';
 import { Role } from '../login-page/user';
+import { HttpClientModule } from '@angular/common/http';
+import { TeacherComponent } from '../teacher/teacher.component';
 
 @Component({
   selector: 'app-school',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterLink, TeacherComponent],
   templateUrl: './school.component.html',
   styleUrl: './school.component.css'
 })
