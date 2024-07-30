@@ -9,7 +9,6 @@ import { Teacher } from './teacher';
 import { TeacherService } from './teacher.service';
 import { switchMap, of } from 'rxjs';
 import { Role } from '../login-page/user';
-import { Principle } from '../school/principle';
 
 @Component({
   selector: 'app-teacher',
@@ -36,12 +35,16 @@ export class TeacherComponent implements OnInit {
     this.getTeachers();
   }
 
+  public get currentTeacherSubject(): string {
+    return SchoolSubject[this.currentEditTeacher.subject];
+  }
+
   public get subjects(): (string | SchoolSubject)[] {
     return Object.getOwnPropertyNames(SchoolSubject).filter(val => isNaN(parseInt(val)));
   }
 
   public getTeachers(): void {
-    this.teacherService.getTeachers().subscribe(
+    this.teacherService.getTeachers(this.schoolId).subscribe(
       teachers => this.teachers = teachers
     );
   }
@@ -52,11 +55,17 @@ export class TeacherComponent implements OnInit {
   }
 
   public delete(teacherId: number): void {
-    this.teacherService.removeTeacher(teacherId);
+    this.teacherService.removeTeacher(teacherId).subscribe(() => this.getTeachers());
   }
 
   public editTeacherForm(form: NgForm, teacherId: number): void {
-    this.teacherService.updateTeacher(teacherId, form.value.teacherName, form.value.teacherAddress, form.value.teacherContact, form.value.teacherSubject).subscribe({
+    this.teacherService.updateTeacher(
+      teacherId,
+      form.value.teacherName,
+      form.value.teacherAddress,
+      form.value.teacherContact,
+      parseInt(SchoolSubject[form.value.teacherSubject]),
+    ).subscribe({
       next: () => this.getTeachers(),
       error: err => this.error = err
     })
@@ -78,7 +87,7 @@ export class TeacherComponent implements OnInit {
           form.value.teacherName,
           form.value.teacherAddress,
           form.value.teacherContact,
-          form.value.teacherSubject,
+          parseInt(SchoolSubject[form.value.teacherSubject]),
           this.schoolId,
           userId,
         )

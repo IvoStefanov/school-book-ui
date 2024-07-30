@@ -14,6 +14,7 @@
         <a [routerLink]="'/teacher/' + teacher.name">{{ teacher.name }}</a>
         <div>{{ teacher.address }}</div>
         <div>{{ teacher.contact }}</div>
+        <div>{{ subjects[teacher.subject] }}</div>
         <div>
           <button (click)="edit(teacher)" class="action-button"><span class="material-icons">edit</span></button>
           <button (click)="delete(teacher.id)" class="action-button"><span class="material-icons">delete</span></button>
@@ -24,17 +25,17 @@
     <div *ngIf="editTeacherMode" id="edit-teacher">
       <form (ngSubmit)="editTeacherForm(editTeacherFrom, currentEditTeacher.id)" #editTeacherFrom="ngForm">
         <label>Name: </label>
-        <input name="teacherName" required [(ngModel)]="currentEditTeacher.name">
+        <input name="teacherName" required [ngModel]="currentEditTeacher.name">
         <br>
         <label>Address: </label>
-        <input ngModel name="teacherAddress" required  [(ngModel)]="currentEditTeacher.address">
+        <input ngModel name="teacherAddress" required  [ngModel]="currentEditTeacher.address">
         <br>
         <label>Contact: </label>
-        <input ngModel name="teacherContact" required  [(ngModel)]="currentEditTeacher.contact">
+        <input ngModel name="teacherContact" required  [ngModel]="currentEditTeacher.contact">
         <br>
         <label for="subjects">Subject: </label>
-        <select ngModel required name="teacherSubject" id="subjects">
-          <option *ngFor="let subject of subjects" [value]="subject" [selected]="currentEditTeacher.subject === subject">{{subject}}</option>
+        <select required [ngModel]="currentTeacherSubject" name="teacherSubject" id="subjects">
+          <option *ngFor="let subject of subjects" [value]="subject" >{{subject}}</option>
         </select>
 
         <button class="action-button" type="submit" [disabled]="!editTeacherFrom.valid"><span class="material-icons">check</span></button>
@@ -56,7 +57,7 @@
         <label>Contact: </label>
         <input ngModel name="teacherContact" required>
         <label for="subjects">Subject: </label>
-        <select ngModel required name="subjects" id="subjects">
+        <select ngModel name="teacherSubject" required  id="subjects">
           <option *ngFor="let subject of subjects" [value]="subject">{{subject}}</option>
         </select>
         <label>Username: </label>

@@ -24,6 +24,8 @@ export class SchoolComponent implements OnInit{
   school: School;
   principle: Principle;
   error = '';
+  editPrincipleMode = false;
+  currentEditPrinciple: Principle = null;
 
   constructor(
     private schoolsService: SchoolsService,
@@ -77,5 +79,28 @@ export class SchoolComponent implements OnInit{
       },
       error: err => this.error = err
     })
+  }
+  
+  public editPrinciple(principle: Principle): void {
+    this.editPrincipleMode = true;
+    this.currentEditPrinciple = principle;
+  }
+
+  public editPrincipleForm(form: NgForm): void {
+    this.schoolsService.updatePrinciple(
+      this.school.id,
+      form.value.principleName,
+      form.value.principleAddress,
+      form.value.principleContact,
+    ).subscribe({
+      next: res => this.principle = res,
+      error: err => this.error = err
+    })
+    form.reset();
+    this.editPrincipleMode = false;
+  }
+
+  public deletePrinciple(schoolId: number): void {
+    this.schoolsService.removePrinciple(schoolId).subscribe(() => this.principle = null);
   }
 }

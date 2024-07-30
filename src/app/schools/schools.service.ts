@@ -92,6 +92,24 @@ export class SchoolsService {
     )
   }
 
+  public updatePrinciple(schoolId: number, name: string, address: string, contact: string): Observable<Principle> {
+    const token: string = JSON.parse(localStorage.getItem('userData')).token;
+    return this.http.post<Principle>(
+      'http://localhost:3000/update-principle',
+      {id: schoolId, name: name, address: address, contact: contact},
+      {headers: {"Authorization": "Bearer " + token}}
+    )
+  }
+
+  public removePrinciple(schoolId: number) {
+    const token: string = JSON.parse(localStorage.getItem('userData')).token;
+    return this.http.post(
+      'http://localhost:3000/remove-principle',
+      {id: schoolId},
+      {headers: {"Authorization": "Bearer " + token}}
+    )
+  }
+
   // private handleError(error: HttpErrorResponse): Observable<any> {
     // let message = 'An unknown error occured!';
     // if(!error.error || !error.error.error) {
