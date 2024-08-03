@@ -1,21 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Teacher } from './teacher';
 import { Observable } from 'rxjs';
-import { SchoolSubject } from '../enums/subjects';
+import { Student } from './student';
+import { Grade } from '../enums/grade';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TeacherService {
+export class StudentService {
 
   constructor(private http: HttpClient) { }
 
-
-  public getTeachers(schoolId: number): Observable<Teacher[]> {
+  public getStudents(schoolId: number): Observable<Student[]> {
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
-    return this.http.get<Teacher[]>(
-       'http://localhost:3000/teachers?school=' + schoolId,
+    return this.http.get<Student[]>(
+       'http://localhost:3000/students?school=' + schoolId,
        {headers: {"Authorization": "Bearer " + token}}
     )
     // .pipe(
@@ -31,38 +30,36 @@ export class TeacherService {
     // )
   }
 
-  public getTeacher(name: string): Observable<Teacher> {
-    return this.http.get<Teacher>(
-       'http://localhost:3000/teacher?name=' + name,
+  public getStudent(name: string): Observable<Student> {
+    return this.http.get<Student>(
+       'http://localhost:3000/student?name=' + name,
     )
   }
 
-  public createTeacher(name: string, address: string, contact: string, subject: SchoolSubject, schoolId: number, userId: number) {
+  public createStudent(name: string, address: string, contact: string, grade: Grade, schoolId: number, userId: number) {
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
     return this.http.post(
-      'http://localhost:3000/create-teacher',
-      {name: name, address: address, contact: contact, subject: subject, schoolId: schoolId, userId: userId},
+      'http://localhost:3000/create-student',
+      {name: name, address: address, contact: contact, grade: grade, schoolId: schoolId, userId: userId},
       {headers: {"Authorization": "Bearer " + token}}
     )
   }
 
-  public updateTeacher(id: number, name: string, address: string, contact: string, subject: SchoolSubject) {
+  public updateStudent(id: number, name: string, address: string, contact: string, grade: Grade) {
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
     return this.http.post(
-      'http://localhost:3000/update-teacher',
-      {id: id, name: name, address: address, contact: contact, subject: subject},
+      'http://localhost:3000/update-student',
+      {id: id, name: name, address: address, contact: contact, grade: grade},
       {headers: {"Authorization": "Bearer " + token}}
     )
   }
 
-  public removeTeacher(id: number) {
+  public removeStudent(id: number) {
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
     return this.http.post(
-      'http://localhost:3000/remove-teacher',
+      'http://localhost:3000/remove-student',
       {id: id},
       {headers: {"Authorization": "Bearer " + token}}
     )
   }
-
-
 }

@@ -1,0 +1,25 @@
+#student-wrapper > div{
+  display: grid;
+  grid-template-columns: 30px 100px 200px 200px 100px 100px;
+  gap: 10px;
+}
+
+#header {
+  display: grid;
+  grid-template-columns: 30px 100px 200px 200px 100px 100px;
+  gap: 10px;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+}
+
+.action-button {
+  border: none;
+  background-color: transparent;
+  size: 12px;
+}
+
+#edit-student {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 10px !important;
+}

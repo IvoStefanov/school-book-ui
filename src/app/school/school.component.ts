@@ -12,11 +12,12 @@ import { UserService } from '../user.service';
 import { Role } from '../login-page/user';
 import { HttpClientModule } from '@angular/common/http';
 import { TeacherComponent } from '../teacher/teacher.component';
+import { StudentComponent } from '../student/student.component';
 
 @Component({
   selector: 'app-school',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, RouterLink, TeacherComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterLink, TeacherComponent, StudentComponent],
   templateUrl: './school.component.html',
   styleUrl: './school.component.css'
 })
@@ -80,7 +81,7 @@ export class SchoolComponent implements OnInit{
       error: err => this.error = err
     })
   }
-  
+
   public editPrinciple(principle: Principle): void {
     this.editPrincipleMode = true;
     this.currentEditPrinciple = principle;
