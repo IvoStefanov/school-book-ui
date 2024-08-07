@@ -13,11 +13,12 @@ import { Role } from '../login-page/user';
 import { HttpClientModule } from '@angular/common/http';
 import { TeacherComponent } from '../teacher/teacher.component';
 import { StudentComponent } from '../student/student.component';
+import { ScheduleComponent } from "../schedule/schedule.component";
 
 @Component({
   selector: 'app-school',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, RouterLink, TeacherComponent, StudentComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterLink, TeacherComponent, StudentComponent, ScheduleComponent],
   templateUrl: './school.component.html',
   styleUrl: './school.component.css'
 })

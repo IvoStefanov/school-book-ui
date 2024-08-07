@@ -1,0 +1,77 @@
+<h3>Schedule</h3>
+<div id="schedule-list">
+  <div id="header">
+    <div>Id</div>
+    <div>Grade</div>
+    <div>Teacher</div>
+    <div>Date</div>
+    <div>Actions</div>
+</div>
+</div>
+<div id="schedule-wrapper" *ngFor="let schedule of schedules">
+  <div>
+    <div>{{ schedule.id }}</div>
+    <div>{{ grades[schedule.grade] }}</div>
+    <div>{{ schedule.teacherId }}</div>
+    <div>{{ dates[schedule.date] }}</div>
+    <div>
+      <button (click)="edit(schedule)" class="action-button"><span class="material-icons">edit</span></button>
+      <button (click)="delete(schedule.id)" class="action-button"><span class="material-icons">delete</span></button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="editScheduleMode" id="edit-schedule">
+  <form (ngSubmit)="editScheduleForm(editScheduleFrom, currentEditSchedule.id)" #editScheduleFrom="ngForm">
+    <label for="grades">Grade: </label>
+    <select required [ngModel]="currentScheduleGrade" name="scheduleGrade" id="grades">
+      <option *ngFor="let grade of grades" [value]="grade" >{{grade}}</option>
+    </select>
+    <br>
+    <label for="dates">Date: </label>
+    <select required [ngModel]="currentScheduleDate" name="scheduleDate" id="dates">
+      <option *ngFor="let date of dates" [value]="date" >{{date}}</option>
+    </select>
+    <br>
+    <label>Contact: </label>
+    <input ngModel name="scheduleContact" required  [ngModel]="currentEditSchedule.contact">
+    <br>
+    <label for="grades">Grade: </label>
+    <select required [ngModel]="currentScheduleGrade" name="scheduleGrade" id="grades">
+      <option *ngFor="let grade of grades" [value]="grade" >{{grade}}</option>
+    </select>
+
+    <button class="action-button" type="submit" [disabled]="!editScheduleFrom.valid"><span class="material-icons">check</span></button>
+    <button class="action-button" (click)="editScheduleMode = false"><span class="material-icons">close</span></button>
+  </form>
+  <div *ngIf="error">{{ error }}</div>
+</div>
+</div>
+
+<button class="action-button" (click)="createScheduleMode = true"><span class="material-icons">add</span> add schedule</button>
+<div *ngIf="createScheduleMode" id="create-schedule">
+<form (ngSubmit)="createScheduleForm(createScheduleFrom)" #createScheduleFrom="ngForm">
+    <label>Name: </label>
+    <input ngModel name="scheduleName" required>
+    <br>
+    <label>Address: </label>
+    <input ngModel name="scheduleAddress" required>
+    <br>
+    <label>Contact: </label>
+    <input ngModel name="scheduleContact" required>
+    <label for="grades">Grade: </label>
+    <select ngModel name="scheduleGrade" required  id="grades">
+      <option *ngFor="let grade of grades" [value]="grade">{{grade}}</option>
+    </select>
+    <label>Username: </label>
+  <input ngModel name="scheduleUsername" required>
+  <br>
+  <label>Password: </label>
+  <input ngModel name="schedulePassword" required>
+  <br>
+    <button type="submit" [disabled]="!createScheduleFrom.valid">Create</button>
+    <button (click)="cancelScheduleCreation()">Cancel</button>
+  </form>
+  <div *ngIf="error">{{ error }}</div>
+</div>
+
