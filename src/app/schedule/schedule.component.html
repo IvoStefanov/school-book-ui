@@ -33,12 +33,9 @@
       <option *ngFor="let date of dates" [value]="date" >{{date}}</option>
     </select>
     <br>
-    <label>Contact: </label>
-    <input ngModel name="scheduleContact" required  [ngModel]="currentEditSchedule.contact">
-    <br>
-    <label for="grades">Grade: </label>
-    <select required [ngModel]="currentScheduleGrade" name="scheduleGrade" id="grades">
-      <option *ngFor="let grade of grades" [value]="grade" >{{grade}}</option>
+    <label for="scheduleTeacherId">Teacher: </label>
+    <select required [ngModel]="currentEditSchedule.teacherId" name="scheduleTeacherId" id="teachers">
+      <option *ngFor="let teacher of teachers" [value]="teacher" >{{teacher.name}} - {{teacher.subject}}</option>
     </select>
 
     <button class="action-button" type="submit" [disabled]="!editScheduleFrom.valid"><span class="material-icons">check</span></button>
@@ -46,28 +43,25 @@
   </form>
   <div *ngIf="error">{{ error }}</div>
 </div>
-</div>
+
 
 <button class="action-button" (click)="createScheduleMode = true"><span class="material-icons">add</span> add schedule</button>
 <div *ngIf="createScheduleMode" id="create-schedule">
 <form (ngSubmit)="createScheduleForm(createScheduleFrom)" #createScheduleFrom="ngForm">
-    <label>Name: </label>
-    <input ngModel name="scheduleName" required>
-    <br>
-    <label>Address: </label>
-    <input ngModel name="scheduleAddress" required>
-    <br>
-    <label>Contact: </label>
-    <input ngModel name="scheduleContact" required>
-    <label for="grades">Grade: </label>
-    <select ngModel name="scheduleGrade" required  id="grades">
-      <option *ngFor="let grade of grades" [value]="grade">{{grade}}</option>
-    </select>
-    <label>Username: </label>
-  <input ngModel name="scheduleUsername" required>
+  <label for="grades">Grade: </label>
+  <select required ngModel name="scheduleGrade" id="grades">
+    <option *ngFor="let grade of grades" [value]="grade" >{{grade}}</option>
+  </select>
   <br>
-  <label>Password: </label>
-  <input ngModel name="schedulePassword" required>
+  <label for="dates">Date: </label>
+  <select required ngModel name="scheduleDate" id="dates">
+    <option *ngFor="let date of dates" [value]="date" >{{date}}</option>
+  </select>
+  <br>
+  <label for="scheduleTeacherId">Teacher: </label>
+  <select required ngModel name="scheduleTeacherId" id="teachers">
+    <option *ngFor="let teacher of teachers" [value]="teacher.id" >{{teacher.name}} - {{transformSubjectEnum(teacher.subject)}}</option>
+  </select>
   <br>
     <button type="submit" [disabled]="!createScheduleFrom.valid">Create</button>
     <button (click)="cancelScheduleCreation()">Cancel</button>

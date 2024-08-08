@@ -8,6 +8,10 @@ import { ScheduleService } from './schedule.service';
 import { UserService } from '../user.service';
 import { Grade } from '../enums/grade';
 import { Date } from '../enums/date';
+import { Teacher } from '../teacher/teacher';
+import { TeacherService } from '../teacher/teacher.service';
+import { Subject } from 'rxjs';
+import { SchoolSubject } from '../enums/subjects';
 
 @Component({
   selector: 'app-schedule',
@@ -23,18 +27,37 @@ export class ScheduleComponent {
   editScheduleMode = false;
   createScheduleMode = false;
   currentEditSchedule: Schedule = null;
+  teachers: Teacher[] = [];
 
   constructor(
     private scheduleService: ScheduleService,
     private userService: UserService,
+    private teacherService: TeacherService
   ) { }
 
   ngOnInit(): void {
     this.getSchedules();
+    this.getTeachers();
   }
 
   public get currentScheduleGrade(): string {
     return Grade[this.currentEditSchedule.grade];
+  }
+
+  public get currentScheduleDate(): string {
+    return Date[this.currentEditSchedule.date];
+  }
+
+  public getTeachers(): void {
+    this.teacherService.getTeachers(this.schoolId)
+    .subscribe(teachers => {
+      this.teachers = teachers
+    }
+    );
+  }
+
+  public transformSubjectEnum(subject:  SchoolSubject): string {
+    return SchoolSubject[subject];
   }
 
   public get grades(): (string | Grade)[] {
@@ -63,9 +86,9 @@ export class ScheduleComponent {
   public editScheduleForm(form: NgForm, scheduleId: number): void {
     this.scheduleService.updateSchedule(
       scheduleId,
-      parseInt(Grade[form.value.grade]),
-      form.value.teacherId,
-      parseInt(Date[form.value.date]),
+      parseInt(Grade[form.value.scheduleGrade]),
+      parseInt(form.value.scheduleTeacherId),
+      parseInt(Date[form.value.scheduleDate]),
     ).subscribe({
       next: () => this.getSchedules(),
       error: err => this.error = err
@@ -77,9 +100,9 @@ export class ScheduleComponent {
   public createScheduleForm(form: NgForm): void {
     this.scheduleService.createSchedule(
       this.schoolId,
-      parseInt(Grade[form.value.grade]),
-      form.value.teacherId,
-      parseInt(Date[form.value.date]),
+      parseInt(Grade[form.value.scheduleGrade]),
+      parseInt(form.value.scheduleTeacherId),
+      parseInt(Date[form.value.scheduleDate]),
     ).subscribe({
       next: () => {
         this.getSchedules()
