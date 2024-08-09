@@ -30,6 +30,12 @@ export class StudentService {
     // )
   }
 
+  public getStudentsByGrade(grade: Grade): Observable<Student[]> {
+    return this.http.get<Student[]>(
+       'http://localhost:3000/student?grade=' + grade,
+    )
+  }
+
   public getStudent(name: string): Observable<Student> {
     return this.http.get<Student>(
        'http://localhost:3000/student?name=' + name,
