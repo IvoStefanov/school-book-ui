@@ -31,9 +31,9 @@ export class TeacherService {
     // )
   }
 
-  public getTeacher(name: string): Observable<Teacher> {
+  public getTeacher(id: number): Observable<Teacher> {
     return this.http.get<Teacher>(
-       'http://localhost:3000/teacher?name=' + name,
+       'http://localhost:3000/teacher?id=' + id,
     )
   }
 

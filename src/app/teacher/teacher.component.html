@@ -11,7 +11,7 @@
     <div id="teacher-wrapper" *ngFor="let teacher of teachers">
       <div>
         <div>{{ teacher.id }}</div>
-        <a [routerLink]="'/teacher/' + teacher.name">{{ teacher.name }}</a>
+        <a [routerLink]="'/teacher-profile/' + teacher.id">{{ teacher.name }}</a>
         <div>{{ teacher.address }}</div>
         <div>{{ teacher.contact }}</div>
         <div>{{ subjects[teacher.subject] }}</div>

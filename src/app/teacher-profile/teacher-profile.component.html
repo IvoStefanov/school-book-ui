@@ -1,0 +1,38 @@
+<div *ngIf="teacher">
+  <div>
+    <div>Name: {{ teacher.name }}</div>
+    <div>Contact: {{ teacher.contact }}</div>
+    <div>Subject: {{ subjects[teacher.subject] }}</div>
+  </div>
+</div>
+
+<h3>Schedule</h3>
+<div id="schedule-list">
+  <div id="header">
+    <div>Id</div>
+    <div>Grade</div>
+    <div>Date</div>
+</div>
+</div>
+<div id="schedule-wrapper" *ngFor="let schedule of schedules">
+  <div>
+    <div>{{ schedule.id }}</div>
+    <div>{{ grades[schedule.grade] }}</div>
+    <div>{{ dates[schedule.date] }}</div>
+  </div>
+</div>
+
+<ng-container *ngFor="let grade of studentGrades | keyvalue">
+  <h3>Students from {{grades[grade.key]}}</h3>
+  <details *ngFor="let student of grade.value">
+    <summary style="display: inline-block">
+      <span>Id: {{ student.id }}</span>
+      <span>Name: {{ student.name }}</span>
+      <span>Contact: {{ student.contact }}</span>
+      <!-- <div>Actions</div> -->
+    </summary>
+    <div>
+      <app-evaluation [student]="student" [subject]="teacher.subject"></app-evaluation>
+    </div>
+  </details>
+</ng-container>

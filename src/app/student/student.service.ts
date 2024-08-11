@@ -31,8 +31,10 @@ export class StudentService {
   }
 
   public getStudentsByGrade(grade: Grade): Observable<Student[]> {
+    const token: string = JSON.parse(localStorage.getItem('userData')).token;
     return this.http.get<Student[]>(
-       'http://localhost:3000/student?grade=' + grade,
+       'http://localhost:3000/students?grade=' + grade,
+       {headers: {"Authorization": "Bearer " + token}}
     )
   }
 

@@ -12,7 +12,7 @@
   <div>
     <div>{{ schedule.id }}</div>
     <div>{{ grades[schedule.grade] }}</div>
-    <div>{{ schedule.teacherId }}</div>
+    <div>{{ schedule.teacher.name}} - {{transformSubjectEnum(schedule.teacher.subject)}}</div>
     <div>{{ dates[schedule.date] }}</div>
     <div>
       <button (click)="edit(schedule)" class="action-button"><span class="material-icons">edit</span></button>
@@ -34,8 +34,8 @@
     </select>
     <br>
     <label for="scheduleTeacherId">Teacher: </label>
-    <select required [ngModel]="currentEditSchedule.teacherId" name="scheduleTeacherId" id="teachers">
-      <option *ngFor="let teacher of teachers" [value]="teacher" >{{teacher.name}} - {{teacher.subject}}</option>
+    <select required [ngModel]="currentEditSchedule.teacher" name="scheduleTeacherId" id="teachers">
+      <option *ngFor="let teacher of teachers" [value]="teacher" >{{teacher.name}} - {{transformSubjectEnum(teacher.subject)}}</option>
     </select>
 
     <button class="action-button" type="submit" [disabled]="!editScheduleFrom.valid"><span class="material-icons">check</span></button>
