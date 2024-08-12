@@ -60,7 +60,7 @@ export class EvaluationComponent implements OnInit {
   // }
 
   public createEvaluationForm(form: NgForm): void {
-    this.marks.push(parseInt(form.value.evaluationMark));
+    // this.marks.push(parseInt(form.value.evaluationMark));
     this.evaluationService.createEvaluation(
       this.student.id,
       this.subject,
@@ -75,8 +75,20 @@ export class EvaluationComponent implements OnInit {
     })
   }
 
-  public cancelEvaluationCreation(): void {
-    this.editEvaluationMode = false;
+  public editEvaluationForm(form: NgForm): void {
+    // this.marks = new Array(form.value.editEvaluationMark.split(' '));
+    this.evaluationService.updateEvaluation(
+      this.student.id,
+      this.subject,
+      this.marks,
+    ).subscribe({
+      next: (marks) => {
+        this.marks = marks;
+        form.reset();
+        this.editEvaluationMode = false;
+      },
+      error: err => this.error = err
+    })
   }
 
   showMarks(): string {

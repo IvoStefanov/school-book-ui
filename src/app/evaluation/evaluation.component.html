@@ -1,6 +1,14 @@
 <div>Evaluation: </div>
 <div *ngIf="marks">{{showMarks()}}</div>
-<form *ngIf="createEvaluationMode" (ngSubmit)="createEvaluationForm(createEvaluationFrom)" #createEvaluationFrom="ngForm">
+<form *ngIf="editEvaluationMode && marks.lenght === 0" (ngSubmit)="editEvaluationForm(editEvaluationFrom)" #editEvaluationFrom="ngForm">
+  <input name="editEvaluationMark" required [ngModel]="marks">
+  <br>
+
+  <button class="action-button" type="submit" [disabled]="!editEvaluationFrom.valid"><span class="material-icons">check</span></button>
+  <button class="action-button" (click)="editEvaluationMode = false"><span class="material-icons">close</span></button>
+</form>
+
+<form *ngIf="createEvaluationMode && marks.lenght === 0" (ngSubmit)="createEvaluationForm(createEvaluationFrom)" #createEvaluationFrom="ngForm">
   <input name="evaluationMark" required ngModel>
   <br>
 
@@ -8,4 +16,4 @@
   <button class="action-button" (click)="createEvaluationMode = false"><span class="material-icons">close</span></button>
 </form>
 
-<button class="action-button" (click)="createEvaluationMode = true"><span class="material-icons">add</span> add evaluation</button>
+<button *ngIf="marks.lenght === 0" class="action-button" (click)="createEvaluationMode = true"><span class="material-icons">add</span> add evaluation</button>
