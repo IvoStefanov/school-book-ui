@@ -15,26 +15,26 @@ export class EvaluationService {
   getStudentMarks(studentId: number, subject: SchoolSubject): Observable<number[]> {
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
     return this.http.get<number[]>(
-       `http://localhost:3000/evaluation?student=${studentId}&subject=${subject}`,
+       `http://localhost:3000/evaluation?studentId=${studentId}&subject=${subject}`,
        {headers: {"Authorization": "Bearer " + token}}
     )
   }
 
-  createEvaluation(studentId: number, subject: SchoolSubject, marks: number []): Observable<number[]> {
+  createEvaluation(student: Student, subject: SchoolSubject, marks: number []): Observable<void> {
     console.log(marks)
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
-    return this.http.post<number[]>(
+    return this.http.post<void>(
       'http://localhost:3000/create-evaluation',
-      {studentId: studentId, subject: subject, marks: marks},
+      {student: student, subject: subject, marks: marks},
       {headers: {"Authorization": "Bearer " + token}}
     )
   }
 
-  updateEvaluation(studentId: number, subject: SchoolSubject, marks: number []): Observable<number[]> {
+  updateEvaluation(student: Student, subject: SchoolSubject, marks: number []): Observable<void> {
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
-    return this.http.post<number[]>(
+    return this.http.post<void>(
       'http://localhost:3000/update-evaluation',
-      {studentId: studentId, subject: subject, marks: marks},
+      {student: student, subject: subject, marks: marks},
       {headers: {"Authorization": "Bearer " + token}}
     )
   }

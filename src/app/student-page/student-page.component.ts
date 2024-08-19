@@ -13,11 +13,14 @@ import { TeacherService } from '../teacher/teacher.service';
 import { UserService } from '../user.service';
 import { isEmpty } from 'lodash';
 import { EvaluationService } from '../evaluation/evaluation.service';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-student-page',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './student-page.component.html',
   styleUrl: './student-page.component.css'
 })
@@ -71,7 +74,7 @@ export class StudentPageComponent implements OnInit {
           }
         }
       })
-    }) 
+    })
   }
 
   public getSubject(teacher: Teacher): string | SchoolSubject {

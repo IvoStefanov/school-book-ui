@@ -6,7 +6,7 @@ import { RouterLink } from '@angular/router';
 import { Student } from '../student/student';
 import { EvaluationService } from './evaluation.service';
 import { SchoolSubject } from '../enums/subjects';
-import { Grade } from '../enums/grade';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-evaluation',
@@ -44,27 +44,25 @@ export class EvaluationComponent implements OnInit {
     return Object.getOwnPropertyNames(SchoolSubject).filter(val => isNaN(parseInt(val)));
   }
 
-
-  // public editScheduleForm(form: NgForm, scheduleId: number): void {
-  //   this.scheduleService.updateSchedule(
-  //     scheduleId,
-  //     parseInt(Grade[form.value.scheduleGrade]),
-  //     parseInt(form.value.scheduleTeacherId),
-  //     parseInt(Date[form.value.scheduleDate]),
-  //   ).subscribe({
-  //     next: () => this.getSchedules(),
-  //     error: err => this.error = err
-  //   })
-  //   form.reset();
-  //   this.editScheduleMode = false;
-  // }
-
   public createEvaluationForm(form: NgForm): void {
-    // this.marks.push(parseInt(form.value.evaluationMark));
+    const newEvaluations = []
+    for (let markStr of (form.value.evaluationMarks as string).split(' ')) {
+      const mark =  parseInt(markStr)
+      if(mark < 1 || mark > 6) {
+        return;
+      }
+      newEvaluations.push(mark)
+    }
+
     this.evaluationService.createEvaluation(
-      this.student.id,
+      this.student,
       this.subject,
-      this.marks,
+      newEvaluations,
+    ).pipe(
+      switchMap(() => this.evaluationService.getStudentMarks(
+        this.student.id,
+        this.subject
+      ))
     ).subscribe({
       next: (marks) => {
         this.marks = marks;
@@ -76,11 +74,24 @@ export class EvaluationComponent implements OnInit {
   }
 
   public editEvaluationForm(form: NgForm): void {
-    // this.marks = new Array(form.value.editEvaluationMark.split(' '));
+    const newEvaluations = []
+    for (let markStr of (form.value.evaluationMarks as string).split(' ')) {
+      const mark =  parseInt(markStr)
+      console.log(mark)
+      if(mark < 1 || mark > 6) {
+        return;
+      }
+      newEvaluations.push(mark)
+    }
     this.evaluationService.updateEvaluation(
-      this.student.id,
+      this.student,
       this.subject,
-      this.marks,
+      newEvaluations,
+    ).pipe(
+      switchMap(() => this.evaluationService.getStudentMarks(
+        this.student.id,
+        this.subject
+      ))
     ).subscribe({
       next: (marks) => {
         this.marks = marks;
