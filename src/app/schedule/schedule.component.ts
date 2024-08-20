@@ -10,8 +10,9 @@ import { Grade } from '../enums/grade';
 import { Date } from '../enums/date';
 import { Teacher } from '../teacher/teacher';
 import { TeacherService } from '../teacher/teacher.service';
-import { Subject } from 'rxjs';
 import { SchoolSubject } from '../enums/subjects';
+import { LoginService } from '../login-page/login-page.service';
+import { Role } from '../login-page/user';
 
 @Component({
   selector: 'app-schedule',
@@ -28,14 +29,16 @@ export class ScheduleComponent implements OnInit {
   createScheduleMode = false;
   currentEditSchedule: Schedule = null;
   teachers: Teacher[] = [];
+  userRole: string;
 
   constructor(
     private scheduleService: ScheduleService,
-    private userService: UserService,
-    private teacherService: TeacherService
+    private teacherService: TeacherService,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit(): void {
+    this.userRole = Role[this.loginService.user.value.role]
     this.getSchedules();
     this.getTeachers();
   }

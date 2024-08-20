@@ -5,10 +5,11 @@ import { AuthGuard } from './login-page/auth.guard';
 import { SchoolComponent } from './school/school.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 import { StudentPageComponent } from './student-page/student-page.component';
+import { AdminAuthGuard } from './login-page/admin-auth.guard';
 
 export const routes: Routes = [
     { path: '', component: LoginPageComponent},
-    { path:'home', component: HomePageComponent, canActivate: [AuthGuard]},
+    { path:'home', component: HomePageComponent, canActivate: [AuthGuard, AdminAuthGuard]},
     { path: 'school/:name', component: SchoolComponent, canActivate: [AuthGuard]},
     { path: 'teacher-profile/:id', component: TeacherProfileComponent, canActivate: [AuthGuard]},
     { path: 'student-page/:id', component: StudentPageComponent, canActivate: [AuthGuard]},

@@ -1,7 +1,9 @@
+import { School } from "./school";
+
 export interface Principle {
   name: string,
   address: string,
   contact: string,
-  schoolId: number,
+  school: School,
   userId: number
 }

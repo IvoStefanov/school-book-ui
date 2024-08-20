@@ -3,7 +3,7 @@ import { SchoolSubject } from '../enums/subjects';
 import { Grade } from '../enums/grade';
 import { Date } from '../enums/date';
 import { Student } from '../student/student';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, RouterLink } from '@angular/router';
 import { switchMap, of } from 'rxjs';
 import { Teacher } from '../teacher/teacher';
 import { Schedule } from '../schedule/schedule';
@@ -16,12 +16,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AbsenceComponent } from '../absence/absence.component';
 import { EvaluationComponent } from '../evaluation/evaluation.component';
-import { LoginService } from '../login-page/login-page.service';
 
 @Component({
   selector: 'app-student-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, AbsenceComponent, EvaluationComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule, AbsenceComponent, EvaluationComponent, RouterLink],
   templateUrl: './student-page.component.html',
   styleUrl: './student-page.component.css'
 })

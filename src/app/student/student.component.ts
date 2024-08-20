@@ -9,6 +9,7 @@ import { of, switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
+import { LoginService } from '../login-page/login-page.service';
 
 @Component({
   selector: 'app-student',
@@ -24,13 +25,16 @@ export class StudentComponent {
   editStudentMode = false;
   createStudentMode = false;
   currentEditStudent: Student = null;
+  userRole: string;
 
   constructor(
     private studentService: StudentService,
     private userService: UserService,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit(): void {
+    this.userRole = Role[this.loginService.user.value.role]
     this.getStudents();
   }
 

@@ -6,7 +6,7 @@
     <div>Address</div>
     <div>Contact</div>
     <div>Grade</div>
-    <div>Actions</div>
+    <div *ngIf="userRole === 'Admin' || userRole === 'Principle'">Actions</div>
 </div>
     <div id="student-wrapper" *ngFor="let student of students">
       <div>
@@ -15,7 +15,7 @@
         <div>{{ student.address }}</div>
         <div>{{ student.contact }}</div>
         <div>{{ grades[student.grade] }}</div>
-        <div>
+        <div *ngIf="userRole === 'Admin' || userRole === 'Principle'">
           <button (click)="edit(student)" class="action-button"><span class="material-icons">edit</span></button>
           <button (click)="delete(student.id)" class="action-button"><span class="material-icons">delete</span></button>
         </div>
@@ -45,7 +45,7 @@
   </div>
 </div>
 
-<button class="action-button" (click)="createStudentMode = true"><span class="material-icons">add</span> add student</button>
+<button *ngIf="userRole === 'Admin' || userRole === 'Principle'" class="action-button" (click)="createStudentMode = true"><span class="material-icons">add</span> add student</button>
 <div *ngIf="createStudentMode" id="create-student">
     <form (ngSubmit)="createStudentForm(createStudentFrom)" #createStudentFrom="ngForm">
         <label>Name: </label>

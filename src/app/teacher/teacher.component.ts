@@ -9,6 +9,7 @@ import { Teacher } from './teacher';
 import { TeacherService } from './teacher.service';
 import { switchMap, of } from 'rxjs';
 import { Role } from '../login-page/user';
+import { LoginService } from '../login-page/login-page.service';
 
 @Component({
   selector: 'app-teacher',
@@ -24,14 +25,16 @@ export class TeacherComponent implements OnInit {
   editTeacherMode = false;
   createTeacherMode = false;
   currentEditTeacher: Teacher = null;
+  userRole: string;
 
   constructor(
     private teacherService: TeacherService,
     private userService: UserService,
-    private route: ActivatedRoute,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit(): void {
+    this.userRole = Role[this.loginService.user.value.role]
     this.getTeachers();
   }
 

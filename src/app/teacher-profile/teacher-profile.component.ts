@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { TeacherService } from '../teacher/teacher.service';
 import { UserService } from '../user.service';
 import { Teacher } from '../teacher/teacher';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, RouterLink } from '@angular/router';
 import { of, switchMap } from 'rxjs';
 import { isEmpty } from 'lodash';
 import { ScheduleService } from '../schedule/schedule.service';
@@ -23,7 +23,7 @@ import { AbsenceComponent } from "../absence/absence.component";
 @Component({
   selector: 'app-teacher-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, ScheduleComponent, StudentComponent, EvaluationComponent, AbsenceComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule, ScheduleComponent, StudentComponent, EvaluationComponent, AbsenceComponent, RouterLink],
   templateUrl: './teacher-profile.component.html',
   styleUrl: './teacher-profile.component.css'
 })

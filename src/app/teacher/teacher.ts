@@ -1,4 +1,5 @@
 import { SchoolSubject } from "../enums/subjects";
+import { School } from "../school/school";
 
 export interface Teacher {
   id: number,
@@ -6,6 +7,6 @@ export interface Teacher {
   address: string,
   contact: string,
   subject: SchoolSubject,
-  schoolId: number,
+  school: School,
   userId: number
 }

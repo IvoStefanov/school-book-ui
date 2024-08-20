@@ -7,8 +7,8 @@
     <div>{{ principle.address }}</div>
     <div>{{ principle.contact }}</div>
     <div>
-      <button (click)="editPrinciple(principle)" class="action-button"><span class="material-icons">edit</span></button>
-      <button (click)="deletePrinciple(school.id)" class="action-button"><span class="material-icons">delete</span></button>
+      <button *ngIf="userRole === 'Admin' || userRole === 'Principle'" (click)="editPrinciple(principle)" class="action-button"><span class="material-icons">edit</span></button>
+      <button *ngIf="userRole === 'Admin'" (click)="deletePrinciple(school.id)" class="action-button"><span class="material-icons">delete</span></button>
     </div>
   </div>
 
@@ -27,9 +27,9 @@
       <button class="action-button" (click)="editPrincipleMode = false"><span class="material-icons">close</span></button>
     </form>
     <div *ngIf="error">{{ error }}</div>
-</div>
+  </div>
 
-  <div *ngIf="!principle">
+  <div *ngIf="userRole === 'Admin' && !principle">
     <div *ngIf="error">{{ error }}</div>
     <form (ngSubmit)="createPrinciple(createPrincipleFrom)" #createPrincipleFrom="ngForm">
       <label>Name: </label>
@@ -53,4 +53,5 @@
 
  <app-teacher [schoolId]="school.id"></app-teacher>
  <app-schedule [schoolId]="school.id"></app-schedule>
- <app-student [schoolId]="school.id"></app-student>
+ <app-student *ngIf="userRole === 'Admin' || userRole === 'Principle' || userRole === 'Teacher'" [schoolId]="school.id"></app-student>
+</div>

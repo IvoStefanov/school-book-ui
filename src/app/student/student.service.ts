@@ -38,9 +38,9 @@ export class StudentService {
     )
   }
 
-  public getStudent(name: string): Observable<Student> {
+  public getStudent(id: number): Observable<Student> {
     return this.http.get<Student>(
-       'http://localhost:3000/student?name=' + name,
+       'http://localhost:3000/student?id=' + id,
     )
   }
 

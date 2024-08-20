@@ -13,6 +13,12 @@ export class SchoolsService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  public getSchoolById(id: number): Observable<School> {
+    return this.http.get<School>(
+       'http://localhost:3000/school-by-id?id=' + id,
+    )
+  }
+
   public getSchool(name: string): Observable<School> {
     return this.http.get<School>(
        'http://localhost:3000/school?name=' + name,

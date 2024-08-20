@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TeacherComponent } from '../teacher/teacher.component';
 import { StudentComponent } from '../student/student.component';
 import { ScheduleComponent } from "../schedule/schedule.component";
+import { LoginService } from '../login-page/login-page.service';
 
 @Component({
   selector: 'app-school',
@@ -28,14 +29,18 @@ export class SchoolComponent implements OnInit{
   error = '';
   editPrincipleMode = false;
   currentEditPrinciple: Principle = null;
+  userRole: string;
 
   constructor(
     private schoolsService: SchoolsService,
     private userService: UserService,
     private route: ActivatedRoute,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit(): void {
+    this.userRole = Role[this.loginService.user.value.role]
+
     this.route.params.pipe(
       switchMap((params: Params) => {
         if (isEmpty(params)) {
@@ -58,7 +63,7 @@ export class SchoolComponent implements OnInit{
 
   public createPrinciple(form: NgForm): void {
     this.userService.createUser(
-      Role.Principal,
+      Role.Principle,
       form.value.principleUsername,
       form.value.principlePassword,
     ).pipe(
