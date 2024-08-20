@@ -7,6 +7,8 @@ import { Student } from '../student/student';
 import { EvaluationService } from './evaluation.service';
 import { SchoolSubject } from '../enums/subjects';
 import { switchMap } from 'rxjs';
+import { LoginService } from '../login-page/login-page.service';
+import { Role } from '../login-page/user';
 
 @Component({
   selector: 'app-evaluation',
@@ -22,12 +24,16 @@ export class EvaluationComponent implements OnInit {
   error = '';
   editEvaluationMode = false;
   createEvaluationMode = false;
+  userRole: string;
 
   constructor(
     private evaluationService: EvaluationService,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit(): void {
+    this.userRole = Role[this.loginService.user.value.role]
+
     this.evaluationService.getStudentMarks(
       this.student.id,
       this.subject

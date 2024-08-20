@@ -58,16 +58,3 @@ export class LoginService {
 
 }
 
- // fetch('http://localhost:3000/auth/login', {
-  //   method: 'POST',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: '{"username": "admin", "password": "admin"}'
-  // });
-
-  // fetch('http://localhost:3000/profile', {
-  //   headers: {
-  //     'Authorization': 'bearer ...'
-  //   }
-  // });

@@ -5,7 +5,7 @@
 <ng-container *ngIf="absences.length">
   <div *ngFor="let absence of absences">
     <span>{{absence}}</span>
-    <button class="action-button" (click)="deleteAbsence(absence)"><span class="material-icons">delete</span></button>
+    <button *ngIf="userRole === 'Teacher'" class="action-button" (click)="deleteAbsence(absence)"><span class="material-icons">delete</span></button>
 
   </div>
 
@@ -19,4 +19,4 @@
   <button class="action-button" (click)="createAbsenceMode = false"><span class="material-icons">close</span></button>
 </form>
 
-<button class="action-button" (click)="createAbsenceMode = true"><span class="material-icons">add</span> add absence</button>
+<button *ngIf="userRole === 'Teacher'" class="action-button" (click)="createAbsenceMode = true"><span class="material-icons">add</span> add absence</button>

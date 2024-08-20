@@ -9,7 +9,7 @@ import { StudentPageComponent } from './student-page/student-page.component';
 export const routes: Routes = [
     { path: '', component: LoginPageComponent},
     { path:'home', component: HomePageComponent, canActivate: [AuthGuard]},
-    { path: 'school/:name', component: SchoolComponent,},
-    { path: 'teacher-profile/:id', component: TeacherProfileComponent,},
-    { path: 'student-page/:id', component: StudentPageComponent,},
+    { path: 'school/:name', component: SchoolComponent, canActivate: [AuthGuard]},
+    { path: 'teacher-profile/:id', component: TeacherProfileComponent, canActivate: [AuthGuard]},
+    { path: 'student-page/:id', component: StudentPageComponent, canActivate: [AuthGuard]},
 ];

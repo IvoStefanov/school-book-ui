@@ -7,6 +7,8 @@ import { switchMap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
+import { LoginService } from '../login-page/login-page.service';
+import { Role } from '../login-page/user';
 
 @Component({
   selector: 'app-absence',
@@ -22,12 +24,15 @@ export class AbsenceComponent implements OnInit {
   error = '';
   editAbsenceMode = false;
   createAbsenceMode = false;
+  userRole: string;
 
   constructor(
     private absenceService: AbsenceService,
+    private loginService: LoginService,
   ) { }
 
   ngOnInit(): void {
+    this.userRole = Role[this.loginService.user.value.role]
     this.absenceService.getStudentAbsences(
       this.student.id,
       this.subject

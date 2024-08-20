@@ -11,7 +11,7 @@
     <div id="student-wrapper" *ngFor="let student of students">
       <div>
         <div>{{ student.id }}</div>
-        <a [routerLink]="'/student/' + student.name">{{ student.name }}</a>
+        <a [routerLink]="'/student-page/' + student.id">{{ student.name }}</a>
         <div>{{ student.address }}</div>
         <div>{{ student.contact }}</div>
         <div>{{ grades[student.grade] }}</div>

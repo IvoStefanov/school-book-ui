@@ -1,54 +1,43 @@
-<div *ngIf="student">
+<div *ngIf="student && schedules">
     <div>
       <div>Name: {{ student.name }}</div>
       <div>Contact: {{ student.contact }}</div>
       <div>Grade: {{ grades[student.grade] }}</div>
     </div>
-  </div>
 
-<h3>Schedule</h3>
-<div id="schedule-list">
-  <div id="header">
-    <div>Id</div>
-    <div>Subject</div>
-    <div>Date</div>
-</div>
-</div>
-<div id="schedule-wrapper" *ngFor="let schedule of weekSchedule">
-  <div>
-    <div>{{ schedule.id }}</div>
-    <div>{{ getSubject(schedule.teacher) }}</div>
-    <div>{{ schedule.teacher }}</div>
-    <div>{{ dates[schedule.date] }}</div>
-  </div>
-</div>
+    <h3>Schedule</h3>
+    <div id="schedule-list">
+      <div id="header">
+        <div>Id</div>
+        <div>Subject</div>
+        <div>Date</div>
+    </div>
+    </div>
+    <div id="schedule-wrapper" *ngFor="let schedule of schedules">
+      <div>
+        <div>{{ schedule.id }}</div>
+        <div>{{ schedule.teacher.name }} - {{ getSubject(schedule.teacher) }}</div>
+        <div>{{ dates[schedule.date] }}</div>
+      </div>
+    </div>
 
-<!-- <h3>Evaluation</h3>
-<div id="evaluation-list">
-  <div id="header">
-    <div>Id</div>
-    <div>Subject</div>
-    <div>Evaluation</div>
+    <h3>Evaluation</h3>
+    <div>
+      <div id="header">
+        <div>Subject</div>
+        <div>Evaluation</div>
+        <div>Absences</div>
+    </div>
+    </div>
+    <ng-container *ngFor="let subject of subjects">
+      <div *ngIf="checkValidSubject(subject)">
+        <div>{{ subject }}</div>
+        <div>
+          <app-evaluation [student]="student" [subject]="schoolSubject(subject)"></app-evaluation>
+        </div>
+        <div>
+          <app-absence [student]="student" [subject]="schoolSubject(subject)"></app-absence>
+        </div>
+      </div>
+    </ng-container>
 </div>
-</div>
-<div id="evaluation-wrapper" *ngFor="let evaluation of evaluation | keyvalue">
-  <div>
-    <div>{{ subjects[evaluation.subject] }}</div>
-    <div>{{ evaluation.marks }}</div>
-  </div>
-</div> -->
-
-<!-- <h3>Absence</h3>
-<div id="evaluation-list">
-  <div id="header">
-    <div>Id</div>
-    <div>Subject</div>
-    <div>Evaluation</div>
-</div>
-</div>
-<div id="evaluation-wrapper" *ngFor="let evaluation of evaluations">
-  <div>
-    <div>{{ subjects[evaluation.subject] }}</div>
-    <div>{{ evaluation.marks }}</div>
-  </div>
-</div> -->

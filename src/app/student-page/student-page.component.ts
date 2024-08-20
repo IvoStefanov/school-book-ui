@@ -9,33 +9,30 @@ import { Teacher } from '../teacher/teacher';
 import { Schedule } from '../schedule/schedule';
 import { ScheduleService } from '../schedule/schedule.service';
 import { StudentService } from '../student/student.service';
-import { TeacherService } from '../teacher/teacher.service';
 import { UserService } from '../user.service';
 import { isEmpty } from 'lodash';
-import { EvaluationService } from '../evaluation/evaluation.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { AbsenceComponent } from '../absence/absence.component';
+import { EvaluationComponent } from '../evaluation/evaluation.component';
+import { LoginService } from '../login-page/login-page.service';
 
 @Component({
   selector: 'app-student-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, AbsenceComponent, EvaluationComponent],
   templateUrl: './student-page.component.html',
   styleUrl: './student-page.component.css'
 })
 export class StudentPageComponent implements OnInit {
   student: Student;
-  weekSchedule: Schedule[];
+  schedules: Schedule[];
   error = '';
-  evaluation: Map<string, number[]> = new Map();
 
   constructor(
-    private teacherService: TeacherService,
     private scheduleService: ScheduleService,
     private studentService: StudentService,
-    private evaluationService: EvaluationService,
-    private userService: UserService,
     private route: ActivatedRoute,
   ) { }
 
@@ -56,29 +53,18 @@ export class StudentPageComponent implements OnInit {
       })
     ).subscribe({
       next: schedule => {
-        this.weekSchedule = schedule;
+        this.schedules = schedule;
       },
       error: () => this.error = "Student page error!"
     })
   }
 
-  public getEvaluation(): void {
-    this.subjects.forEach(subject => {
-      this.evaluationService.getStudentMarks(this.student.id, subject as unknown as SchoolSubject).subscribe(marks => {
-        if(marks) {
-          if(this.evaluation.has(subject)) {
-            let values = this.evaluation.get(subject);
-            this.evaluation.set(subject, values.concat(marks))
-          } else {
-            this.evaluation.set(subject, marks)
-          }
-        }
-      })
-    })
-  }
-
   public getSubject(teacher: Teacher): string | SchoolSubject {
     return this.subjects[teacher.subject];
+  }
+
+  public checkValidSubject(subject: string): boolean {
+    return this.schedules.filter(schedule => schedule.teacher.subject === this.schoolSubject(subject)).length > 0;
   }
 
   public get grades(): (string | Grade)[] {
@@ -91,5 +77,9 @@ export class StudentPageComponent implements OnInit {
 
   public get subjects(): string[] {
     return Object.getOwnPropertyNames(SchoolSubject).filter(val => isNaN(parseInt(val)));
+  }
+
+  public schoolSubject(subject: string): SchoolSubject {
+    return SchoolSubject[subject as keyof typeof SchoolSubject];
   }
 }
