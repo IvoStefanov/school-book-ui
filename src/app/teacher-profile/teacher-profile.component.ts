@@ -18,11 +18,12 @@ import { StudentComponent } from "../student/student.component";
 import { Date } from '../enums/date';
 import { SchoolSubject } from '../enums/subjects';
 import { EvaluationComponent } from "../evaluation/evaluation.component";
+import { AbsenceComponent } from "../absence/absence.component";
 
 @Component({
   selector: 'app-teacher-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, ScheduleComponent, StudentComponent, EvaluationComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule, ScheduleComponent, StudentComponent, EvaluationComponent, AbsenceComponent],
   templateUrl: './teacher-profile.component.html',
   styleUrl: './teacher-profile.component.css'
 })

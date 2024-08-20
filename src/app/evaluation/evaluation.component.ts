@@ -40,10 +40,6 @@ export class EvaluationComponent implements OnInit {
     })
   }
 
-  public get subjects(): (string | SchoolSubject)[] {
-    return Object.getOwnPropertyNames(SchoolSubject).filter(val => isNaN(parseInt(val)));
-  }
-
   public createEvaluationForm(form: NgForm): void {
     const newEvaluations = []
     for (let markStr of (form.value.evaluationMarks as string).split(' ')) {

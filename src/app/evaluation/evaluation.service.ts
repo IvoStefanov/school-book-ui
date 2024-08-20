@@ -21,7 +21,6 @@ export class EvaluationService {
   }
 
   createEvaluation(student: Student, subject: SchoolSubject, marks: number []): Observable<void> {
-    console.log(marks)
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
     return this.http.post<void>(
       'http://localhost:3000/create-evaluation',

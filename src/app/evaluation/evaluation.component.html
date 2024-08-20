@@ -10,7 +10,7 @@
 </form>
 
 <form *ngIf="createEvaluationMode && !marks.length" (ngSubmit)="createEvaluationForm(createEvaluationFrom)" #createEvaluationFrom="ngForm">
-  <input name="evaluationMarks" required ngModel>
+  <input name="evaluationMarks" required ngModel placeholder="Example: 1 2 3 4">
   <br>
 
   <button class="action-button" type="submit" [disabled]="!createEvaluationFrom.valid"><span class="material-icons">check</span></button>
@@ -26,3 +26,5 @@
 </form>
 
 <button *ngIf="marks.length" class="action-button" (click)="editEvaluationMode = true"><span class="material-icons">edit</span></button>
+
+<button *ngIf="marks.length === 0" class="action-button" (click)="createEvaluationMode = true"><span class="material-icons">add</span> add evaluation</button>
