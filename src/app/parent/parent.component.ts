@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { LoginService } from '../login-page/login-page.service';
 import { Role } from '../login-page/user';
 import { ParentService } from '../parent-profile/parent.service';
@@ -20,11 +20,14 @@ import { Student } from '../student/student';
 })
 export class ParentComponent implements OnInit{
   @Input() student: Student;
+  @ViewChild('selectParentMenu') selectedParent: ElementRef;
   parent: Parent;
+  parents: Parent[];
   userRole: string;
 
   error = '';
-  editParentMode: boolean;
+  editParentMode = false;
+  createParentMode = false;
   currentEditParent: Parent;
 
   constructor(
@@ -36,11 +39,15 @@ export class ParentComponent implements OnInit{
 
   ngOnInit(): void {
     this.userRole = Role[this.loginService.user.value.role]
-    this.parentService.getParent(this.student.parentId).subscribe(parent => this.parent = parent)
+    if (this.student.parent) {
+      this.parent = this.student.parent;
+    } else {
+      this.getAllParents();
+    }
   }
 
-  getAllParents(): Observable<Parent[]> {
-    return this.parentService.getAllParents()
+  getAllParents(): void {
+    this.parentService.getAllParents(this.student.school.id).subscribe(parents => this.parents = parents);
   }
 
   createParent(form: NgForm) {
@@ -65,27 +72,32 @@ export class ParentComponent implements OnInit{
       next: (parent: Parent) => {
         this.parent = parent
         form.reset();
+        this.createParentMode = false;
       },
       error: err => this.error = err
     })
   }
 
-  selectParent(parent: Parent): void  {
+  selectParent(): void  {
+    if (!this.selectedParent.nativeElement.value){
+      return;
+    }
+    const parentId = parseInt(this.selectedParent.nativeElement.value);
+    
     this.studentService.updateStudentParent(
       this.student.id,
-      parent.id,
+      parentId,
     ).pipe(
-      switchMap(student => this.parentService.getParent(student.parentId))
+      switchMap(student => this.parentService.getParent(student.parent.id))
     ).subscribe({
-      next: res => this.parent = parent,
+      next: parent => this.parent = parent,
       error: err => this.error = err
     })
-    this.editParentMode = false;
   }
 
-  editParent(parent: Parent) {
+  editParent() {
     this.editParentMode = true;
-    this.currentEditParent = parent;
+    this.currentEditParent = this.parent;
   }
 
   public editParentForm(form: NgForm): void {

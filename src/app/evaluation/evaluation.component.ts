@@ -79,7 +79,6 @@ export class EvaluationComponent implements OnInit {
     const newEvaluations = []
     for (let markStr of (form.value.evaluationMarks as string).split(' ')) {
       const mark =  parseInt(markStr)
-      console.log(mark)
       if(mark < 1 || mark > 6) {
         return;
       }

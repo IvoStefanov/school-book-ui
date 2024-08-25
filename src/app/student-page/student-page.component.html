@@ -1,9 +1,10 @@
 <div *ngIf="student">
     <div>
       <div>Name: {{ student.name }}</div>
+      <div>Address: {{ student.address }}</div>
       <div>Contact: {{ student.contact }}</div>
       <div>Grade: {{ grades[student.grade] }}</div>
-      <app-parent [parentId]="student.parentId" [schoolId]="student.school.id"></app-parent>
+      <app-parent [student]="student"></app-parent>
     </div>
 
     <ng-container *ngIf="schedules">

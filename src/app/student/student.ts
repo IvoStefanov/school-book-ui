@@ -1,4 +1,5 @@
 import { Grade } from "../enums/grade";
+import { Parent } from "../parent/parent";
 import { School } from "../school/school";
 
 export interface Student {
@@ -7,7 +8,7 @@ export interface Student {
   address: string,
   contact: string,
   grade: Grade,
-  parentId: number,
+  parent: Parent,
   school: School,
   userId: number
 }
