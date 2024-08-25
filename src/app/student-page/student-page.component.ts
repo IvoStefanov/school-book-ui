@@ -4,23 +4,23 @@ import { Grade } from '../enums/grade';
 import { Date } from '../enums/date';
 import { Student } from '../student/student';
 import { ActivatedRoute, Params, RouterLink } from '@angular/router';
-import { switchMap, of } from 'rxjs';
+import { switchMap, of, zip } from 'rxjs';
 import { Teacher } from '../teacher/teacher';
 import { Schedule } from '../schedule/schedule';
 import { ScheduleService } from '../schedule/schedule.service';
 import { StudentService } from '../student/student.service';
-import { UserService } from '../user.service';
 import { isEmpty } from 'lodash';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { AbsenceComponent } from '../absence/absence.component';
 import { EvaluationComponent } from '../evaluation/evaluation.component';
+import { ParentComponent } from "../parent/parent.component";
 
 @Component({
   selector: 'app-student-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, AbsenceComponent, EvaluationComponent, RouterLink],
+  imports: [CommonModule, FormsModule, HttpClientModule, AbsenceComponent, EvaluationComponent, RouterLink, ParentComponent],
   templateUrl: './student-page.component.html',
   styleUrl: './student-page.component.css'
 })
@@ -41,14 +41,14 @@ export class StudentPageComponent implements OnInit {
         if (isEmpty(params)) {
           return of();
         }
-        return this.studentService.getStudent(params["id"])
+        return this.studentService.getStudent(params["id"]);
       }),
       switchMap((student: Student | undefined) => {
         if(!student) {
           return of();
         }
         this.student = student;
-        return this.scheduleService.getSchedulesByGrade(student.grade)
+        return this.scheduleService.getSchedulesByGrade(student.grade);
       })
     ).subscribe({
       next: schedule => {

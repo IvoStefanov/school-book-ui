@@ -62,6 +62,15 @@ export class StudentService {
     )
   }
 
+  public updateStudentParent(id: number, parentId: number): Observable<Student> {
+    const token: string = JSON.parse(localStorage.getItem('userData')).token;
+    return this.http.post<Student>(
+      'http://localhost:3000/update-student-parent',
+      {id: id, parentId: parentId},
+      {headers: {"Authorization": "Bearer " + token}}
+    )
+  }
+
   public removeStudent(id: number) {
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
     return this.http.post(

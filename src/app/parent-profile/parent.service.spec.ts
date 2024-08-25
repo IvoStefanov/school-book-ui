@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StudentPageService } from './student-page.service';
+import { ParentService } from './parent.service';
 
-describe('StudentPageService', () => {
-  let service: StudentPageService;
+describe('ParentService', () => {
+  let service: ParentService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(StudentPageService);
+    service = TestBed.inject(ParentService);
   });
 
   it('should be created', () => {
