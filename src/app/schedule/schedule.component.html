@@ -1,6 +1,6 @@
-<h3>Schedule</h3>
+<h1>Schedule</h1>
 <div id="schedule-list">
-  <div id="header">
+  <div id="table-header">
     <div>Id</div>
     <div>Grade</div>
     <div>Teacher</div>
@@ -16,7 +16,7 @@
     <div>{{ dates[schedule.date] }}</div>
     <div *ngIf="userRole === 'Admin' || userRole === 'Principle'">
       <button (click)="edit(schedule)" class="action-button"><span class="material-icons">edit</span></button>
-      <button (click)="delete(schedule.id)" class="action-button"><span class="material-icons">delete</span></button>
+      <button (click)="delete(schedule.id)" class="action-button delete-button"><span class="material-icons">delete</span></button>
     </div>
   </div>
 </div>
@@ -38,33 +38,38 @@
       <option *ngFor="let teacher of teachers" [value]="teacher" >{{teacher.name}} - {{transformSubjectEnum(teacher.subject)}}</option>
     </select>
 
-    <button class="action-button" type="submit" [disabled]="!editScheduleFrom.valid"><span class="material-icons">check</span></button>
-    <button class="action-button" (click)="editScheduleMode = false"><span class="material-icons">close</span></button>
+    <button class="action-button text-button" type="submit" [disabled]="!editScheduleFrom.valid">Save</button>
+    <button class="action-button text-button cancel-button" (click)="editScheduleMode = false">Cancel</button>
   </form>
   <div *ngIf="error">{{ error }}</div>
 </div>
 
 
-<button *ngIf="userRole === 'Admin' || userRole === 'Principle'" class="action-button" (click)="createScheduleMode = true"><span class="material-icons">add</span> add schedule</button>
+<button *ngIf="userRole === 'Admin' || userRole === 'Principle'" class="action-button add-button" (click)="createScheduleMode = true"><span class="material-icons">add</span> add schedule</button>
 <div *ngIf="createScheduleMode" id="create-schedule">
 <form (ngSubmit)="createScheduleForm(createScheduleFrom)" #createScheduleFrom="ngForm">
-  <label for="grades">Grade: </label>
-  <select required ngModel name="scheduleGrade" id="grades">
-    <option *ngFor="let grade of grades" [value]="grade" >{{grade}}</option>
-  </select>
-  <br>
-  <label for="dates">Date: </label>
-  <select required ngModel name="scheduleDate" id="dates">
-    <option *ngFor="let date of dates" [value]="date" >{{date}}</option>
-  </select>
-  <br>
-  <label for="scheduleTeacherId">Teacher: </label>
-  <select required ngModel name="scheduleTeacherId" id="teachers">
-    <option *ngFor="let teacher of teachers" [value]="teacher.id" >{{teacher.name}} - {{transformSubjectEnum(teacher.subject)}}</option>
-  </select>
-  <br>
-    <button type="submit" [disabled]="!createScheduleFrom.valid">Create</button>
-    <button (click)="cancelScheduleCreation()">Cancel</button>
+  <div>
+    <label for="grades">Grade: </label>
+    <select required ngModel name="scheduleGrade" id="grades">
+      <option *ngFor="let grade of grades" [value]="grade" >{{grade}}</option>
+    </select>
+  </div>
+  <div>
+    <label for="dates">Date: </label>
+    <select required ngModel name="scheduleDate" id="dates">
+      <option *ngFor="let date of dates" [value]="date" >{{date}}</option>
+    </select>
+  </div>
+  <div>
+    <label for="scheduleTeacherId">Teacher: </label>
+    <select required ngModel name="scheduleTeacherId" id="teachers">
+      <option *ngFor="let teacher of teachers" [value]="teacher.id" >{{teacher.name}} - {{transformSubjectEnum(teacher.subject)}}</option>
+    </select>
+  </div>
+ <div>
+  <button class="action-button text-button" type="submit" [disabled]="!createScheduleFrom.valid">Create</button>
+  <button class="action-button text-button cancel-button" (click)="cancelScheduleCreation()">Cancel</button>
+ </div>
   </form>
   <div *ngIf="error">{{ error }}</div>
 </div>

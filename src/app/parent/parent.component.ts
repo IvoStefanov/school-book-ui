@@ -16,7 +16,7 @@ import { Student } from '../student/student';
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule],
   templateUrl: './parent.component.html',
-  styleUrl: './parent.component.css'
+  styleUrls: ['./parent.component.css','/src/styles.css']
 })
 export class ParentComponent implements OnInit{
   @Input() student: Student;

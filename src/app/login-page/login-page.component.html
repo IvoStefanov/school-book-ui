@@ -1,9 +1,14 @@
-<form (ngSubmit)="login(loginForm)" #loginForm="ngForm">
-  <label>Username: </label>
-  <input ngModel name="username" required>
+
+<div  id="header">
+  School Managing System
+</div>
+
+<form id="login-form" (ngSubmit)="login(loginForm)" #loginForm="ngForm">
+  <div id="login-header">Login</div>
+ 
+  <input ngModel name="username" required placeholder="username">
   <br>
-  <label>Password: </label>
-  <input ngModel name="password" required>
+  <input ngModel name="password" type="password" required placeholder="password">
   <br>
   <button type="submit" [disabled]="!loginForm.valid">Login</button>
 </form>

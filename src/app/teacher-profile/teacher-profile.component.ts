@@ -25,7 +25,7 @@ import { AbsenceComponent } from "../absence/absence.component";
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, ScheduleComponent, StudentComponent, EvaluationComponent, AbsenceComponent, RouterLink],
   templateUrl: './teacher-profile.component.html',
-  styleUrl: './teacher-profile.component.css'
+  styleUrls: ['./teacher-profile.component.css', '/src/styles.css']
 })
 export class TeacherProfileComponent implements OnInit {
   teacher: Teacher;

@@ -1,38 +1,44 @@
 <div>
-  <h3>Parent</h3>
-  <ng-container *ngIf="parent">
-    <div>{{ parent.name }}</div>
-    <div>{{ parent.address }}</div>
-    <div>{{ parent.contact }}</div>
+  <h2>Parent</h2>
+  <div *ngIf="parent" class="info">
+    <div>Name: {{ parent.name }}</div>
+    <div>Address: {{ parent.address }}</div>
+    <div>Contact: {{ parent.contact }}</div>
     <div *ngIf="userRole === 'Admin' || userRole === 'Principle'">
       <button (click)="editParent()" class="action-button"><span class="material-icons">edit</span></button>
     </div>
-  </ng-container>
+  </div>
 </div>
 
-<button  *ngIf="!parent && !createParentMode" (click)="createParentMode = true">Create parent:</button>
+<button class="action-button text-button" *ngIf="!parent && !createParentMode && (userRole === 'Admin' || userRole === 'Principle')" (click)="createParentMode = true">Create parent</button>
 
 <div *ngIf="!parent && (userRole === 'Admin' || userRole === 'Principle')">
   <div *ngIf="error">{{ error }}</div>
   <form *ngIf="createParentMode" (ngSubmit)="createParent(createParentFrom)" #createParentFrom="ngForm">
+   <div>
     <label>Name: </label>
     <input ngModel name="parentName" required>
-    <br>
-    <label>Address: </label>
-    <input ngModel name="parentAddress" required>
-    <br>
-    <label>Contact: </label>
-    <input ngModel name="parentContact" required>
-    <br>
-    <label>Username: </label>
-    <input ngModel name="parentUsername" required>
-    <br>
-    <label>Password: </label>
-    <input ngModel name="parentPassword" required>
-    <br>
-    <button type="submit" [disabled]="!createParentFrom.valid">Create</button>
-    <button class="action-button" (click)="createParentMode = false"><span class="material-icons">close</span></button>
-
+   </div>
+    <div>
+      <label>Address: </label>
+      <input ngModel name="parentAddress" required>
+    </div>
+    <div>
+      <label>Contact: </label>
+      <input ngModel name="parentContact" required>
+    </div>
+    <div>
+      <label>Username: </label>
+      <input ngModel name="parentUsername" required>
+    </div>
+    <div>
+      <label>Password: </label>
+      <input ngModel name="parentPassword" required>
+    </div>
+   <div>
+    <button class="action-button text-button" type="submit" [disabled]="!createParentFrom.valid">Create</button>
+    <button class="action-button text-button cancel-button" (click)="createParentMode = false">Cancel</button>
+   </div>
   </form>
 
   <div *ngIf="!createParentMode">
@@ -40,24 +46,29 @@
       <option value="null" selected>Select parent</option>
       <option *ngFor="let p of parents" [value]="p.id">{{p.name}}</option>
     </select>
-    <button (click)="selectParent()">Apply</button>
+    <button class="action-button text-button" (click)="selectParent()">Apply</button>
   </div>
 </div>
 
 <div *ngIf="parent && editParentMode">
   <div id="edit-parent">
     <form (ngSubmit)="editParentForm(editParentFrom)" #editParentFrom="ngForm">
-      <label>Name: </label>
+      <div>
+        <label>Name: </label>
       <input name="parentName" required [ngModel]="currentEditParent.name">
-      <br>
-      <label>Address: </label>
-      <input ngModel name="parentAddress" required  [ngModel]="currentEditParent.address">
-      <br>
+      </div>
+      <div>
+        <label>Address: </label>
+        <input ngModel name="parentAddress" required  [ngModel]="currentEditParent.address">
+      </div>
+     <div>
       <label>Contact: </label>
       <input ngModel name="parentContact" required  [ngModel]="currentEditParent.contact">
-
-      <button class="action-button" type="submit" [disabled]="!editParentFrom.valid"><span class="material-icons">check</span></button>
-      <button class="action-button" (click)="editParentMode = false"><span class="material-icons">close</span></button>
+     </div>
+    <div>
+      <button class="action-button text-button" type="submit" [disabled]="!editParentFrom.valid">Save</button>
+      <button class="action-button text-button cancel-button" (click)="editParentMode = false">Cancel</button>
+    </div>
     </form>
     <div *ngIf="error">{{ error }}</div>
   </div>

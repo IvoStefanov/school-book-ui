@@ -1,5 +1,5 @@
-<div>Evaluation: </div>
-<div *ngIf="!marks.length">No marks yet!</div>
+<h3>Evaluation: </h3>
+<div id="no-evaluation" *ngIf="!marks.length">No marks yet!</div>
 <div *ngIf="marks.length">{{showMarks()}}</div>
 <form *ngIf="editEvaluationMode && !marks.length" (ngSubmit)="editEvaluationForm(editEvaluationFrom)" #editEvaluationFrom="ngForm">
   <input name="editEvaluationMark" required [ngModel]="marks">
@@ -10,21 +10,25 @@
 </form>
 
 <form *ngIf="createEvaluationMode && !marks.length" (ngSubmit)="createEvaluationForm(createEvaluationFrom)" #createEvaluationFrom="ngForm">
-  <input name="evaluationMarks" required ngModel placeholder="Example: 1 2 3 4">
-  <br>
-
-  <button class="action-button" type="submit" [disabled]="!createEvaluationFrom.valid"><span class="material-icons">check</span></button>
-  <button class="action-button" (click)="createEvaluationMode = false"><span class="material-icons">close</span></button>
+  <div>
+    <input name="evaluationMarks" required ngModel placeholder="Example: 1 2 3 4">
+  </div>
+  <div>
+    <button class="action-button" type="submit" [disabled]="!createEvaluationFrom.valid"><span class="material-icons">check</span></button>
+    <button class="action-button" (click)="createEvaluationMode = false"><span class="material-icons">close</span></button>
+  </div>
 </form>
 
 <form *ngIf="editEvaluationMode && marks.length" (ngSubmit)="editEvaluationForm(editEvaluationFrom)" #editEvaluationFrom="ngForm">
-  <input name="evaluationMarks" required [ngModel]="showMarks()">
-  <br>
-
-  <button class="action-button" type="submit" [disabled]="!editEvaluationFrom.valid"><span class="material-icons">check</span></button>
-  <button class="action-button" (click)="editEvaluationMode = false"><span class="material-icons">close</span></button>
+  <div>
+    <input name="evaluationMarks" required [ngModel]="showMarks()">
+  </div>
+  <div>
+    <button class="action-button" type="submit" [disabled]="!editEvaluationFrom.valid"><span class="material-icons">check</span></button>
+    <button class="action-button" (click)="editEvaluationMode = false"><span class="material-icons">close</span></button>
+  </div>
 </form>
 
 <button *ngIf="userRole === 'Teacher' && marks.length" class="action-button" (click)="editEvaluationMode = true"><span class="material-icons">edit</span></button>
 
-<button *ngIf="userRole === 'Teacher' && marks.length === 0" class="action-button" (click)="createEvaluationMode = true"><span class="material-icons">add</span> add evaluation</button>
+<button *ngIf="userRole === 'Teacher' && marks.length === 0" class="action-button add-button" (click)="createEvaluationMode = true"><span class="material-icons">add</span> add evaluation</button>

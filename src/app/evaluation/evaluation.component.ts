@@ -15,7 +15,7 @@ import { Role } from '../login-page/user';
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, RouterLink],
   templateUrl: './evaluation.component.html',
-  styleUrl: './evaluation.component.css'
+  styleUrls: ['./evaluation.component.css', '/src/styles.css']
 })
 export class EvaluationComponent implements OnInit {
   @Input() student: Student;

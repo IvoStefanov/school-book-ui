@@ -1,53 +1,68 @@
+<h1>Schools</h1>
+
 <div id="school-list">
-  <div id="header">
+  <div id="table-header">
     <div>Id</div>
     <div>Name</div>
     <div>Address</div>
     <div>Contact</div>
     <div>Actions</div>
 </div>
-    <div id="school-wrapper" *ngFor="let school of schools">
+  <div id="school-wrapper" *ngFor="let school of schools">
+    <div>
+      <div>{{ school.id }}</div>
+      <a [routerLink]="'/school/' + school.name">{{ school.name }}</a>
+      <div>{{ school.address }}</div>
+      <div>{{ school.contact }}</div>
       <div>
-        <div>{{ school.id }}</div>
-        <a [routerLink]="'/school/' + school.name">{{ school.name }}</a>
-        <div>{{ school.address }}</div>
-        <div>{{ school.contact }}</div>
-        <div>
-          <button (click)="edit(school)" class="action-button"><span class="material-icons">edit</span></button>
-          <button (click)="remove(school.id)" class="action-button"><span class="material-icons">delete</span></button>
-        </div>
+        <button (click)="edit(school)" class="action-button"><span class="material-icons">edit</span></button>
+        <button (click)="remove(school.id)" class="action-button delete-button"><span class="material-icons">delete</span></button>
       </div>
     </div>
-    <div *ngIf="editMode" id="edit-school">
-      <form (ngSubmit)="editSchool(editSchoolFrom, currentEditSchool.id)" #editSchoolFrom="ngForm">
+  </div>
+  <div *ngIf="editMode" id="edit-school">
+    <form (ngSubmit)="editSchool(editSchoolFrom, currentEditSchool.id)" #editSchoolFrom="ngForm">
+      <div>
         <label>Name: </label>
         <input name="schoolName" required [(ngModel)]="currentEditSchool.name">
-        <br>
+      </div>
+      <div>
         <label>Address: </label>
-        <input ngModel name="schoolAddress" required  [(ngModel)]="currentEditSchool.address">
-        <br>
+        <input ngModel name="schoolAddress" required [(ngModel)]="currentEditSchool.address">
+      </div>
+      <div>
         <label>Contact: </label>
-        <input ngModel name="schoolContact" required  [(ngModel)]="currentEditSchool.contact">
-        <button class="action-button" type="submit" [disabled]="!editSchoolFrom.valid"><span class="material-icons">check</span></button>
-        <button class="action-button" (click)="editMode = false"><span class="material-icons">close</span></button>
-      </form>
-      <div *ngIf="error">{{ error }}</div>
+        <input ngModel name="schoolContact" required [(ngModel)]="currentEditSchool.contact">
+      </div>
+      <div>
+        <button class="action-button text-button" type="submit" [disabled]="!editSchoolFrom.valid">Save</button>
+        <button class="action-button text-button cancel-button" (click)="editMode = false">Cancel</button>
+      </div>
+    </form>
+    <div *ngIf="error">{{ error }}</div>
   </div>
-
 </div>
-<button class="action-button" (click)="createMode = true"><span class="material-icons">add</span> add school</button>
+
+<button class="action-button add-button" (click)="createMode = true"><span class="material-icons">add</span> add school</button>
+
 <div *ngIf="createMode" id="create-school">
-    <form (ngSubmit)="createSchool(createSchoolFrom)" #createSchoolFrom="ngForm">
-        <label>Name: </label>
-        <input ngModel name="schoolName" required>
-        <br>
-        <label>Address: </label>
-        <input ngModel name="schoolAddress" required>
-        <br>
-        <label>Contact: </label>
-        <input ngModel name="schoolContact" required>
-        <button type="submit" [disabled]="!createSchoolFrom.valid">Create</button>
-        <button (click)="cancelCreation()">Cancel</button>
-      </form>
-      <div *ngIf="error">{{ error }}</div>
+  <form (ngSubmit)="createSchool(createSchoolFrom)" #createSchoolFrom="ngForm">
+    <div>
+      <label>Name: </label>
+      <input ngModel name="schoolName" required>
+    </div>
+    <div>
+      <label>Address: </label>
+      <input ngModel name="schoolAddress" required>
+    </div>
+   <div>
+      <label>Contact: </label>
+      <input ngModel name="schoolContact" required>
+   </div>
+    <div>
+      <button class="action-button text-button" type="submit" [disabled]="!createSchoolFrom.valid">Create</button>
+      <button class="action-button text-button cancel-button" (click)="cancelCreation()">Cancel</button>
+    </div>
+  </form>
+  <div *ngIf="error">{{ error }}</div>
 </div>

@@ -1,14 +1,18 @@
 <div *ngIf="teacher">
-  <div>
-    <div>Name: {{ teacher.name }}</div>
+  <h1>{{ teacher.name }}</h1>
+  <div class="info">
     <div>Contact: {{ teacher.contact }}</div>
     <div>Subject: {{ subjects[teacher.subject] }}</div>
   </div>
 </div>
 
-<h3>Schedule</h3>
+<br>
+
+<span id="school-page-link">School page: <a [routerLink]="'/school/' + teacher.school.name">{{teacher.school.name}}</a></span>
+
+<h2>Schedule</h2>
 <div id="schedule-list">
-  <div id="header">
+  <div id="table-header">
     <div>Id</div>
     <div>Grade</div>
     <div>Date</div>
@@ -23,7 +27,7 @@
 </div>
 
 <ng-container *ngFor="let grade of studentGrades | keyvalue">
-  <h3>Students from {{grades[grade.key]}}</h3>
+  <h2>Students from {{grades[grade.key]}}</h2>
   <details *ngFor="let student of grade.value">
     <summary style="display: inline-block">
       <span>Id: {{ student.id }}</span>
@@ -32,10 +36,8 @@
     </summary>
     <div>
       <app-evaluation [student]="student" [subject]="teacher.subject"></app-evaluation>
+      <br>
       <app-absence [student]="student" [subject]="teacher.subject"></app-absence>
     </div>
   </details>
 </ng-container>
-
-<a [routerLink]="'/school/' + teacher.school.name">School page: {{teacher.school.name}}</a>
-

@@ -1,6 +1,6 @@
-<div>Absences: </div>
+<h3>Absences: </h3>
 
-<div *ngIf="!absences.length">No absences!</div>
+<div id="no-absences" *ngIf="!absences.length">No absences!</div>
 
 <ng-container *ngIf="absences.length">
   <div *ngFor="let absence of absences">
@@ -12,11 +12,13 @@
 </ng-container>
 
 <form *ngIf="createAbsenceMode" (ngSubmit)="createAbsenceForm(createAbsenceFrom)" #createAbsenceFrom="ngForm">
-  <input name="absence" required ngModel placeholder="dd/mm/yyyy">
-  <br>
-
-  <button class="action-button" type="submit" [disabled]="!createAbsenceFrom.valid"><span class="material-icons">check</span></button>
-  <button class="action-button" (click)="createAbsenceMode = false"><span class="material-icons">close</span></button>
+  <div>
+    <input name="absence" required ngModel placeholder="dd/mm/yyyy">
+  </div>
+  <div>
+    <button class="action-button" type="submit" [disabled]="!createAbsenceFrom.valid"><span class="material-icons">check</span></button>
+    <button class="action-button" (click)="createAbsenceMode = false"><span class="material-icons">close</span></button>
+  </div>
 </form>
 
-<button *ngIf="userRole === 'Teacher'" class="action-button" (click)="createAbsenceMode = true"><span class="material-icons">add</span> add absence</button>
+<button *ngIf="userRole === 'Teacher'" class="action-button add-button" (click)="createAbsenceMode = true"><span class="material-icons">add</span> add absence</button>

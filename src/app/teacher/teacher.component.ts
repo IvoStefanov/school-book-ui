@@ -16,7 +16,7 @@ import { LoginService } from '../login-page/login-page.service';
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, RouterLink],
   templateUrl: './teacher.component.html',
-  styleUrl: './teacher.component.css'
+  styleUrls: ['./teacher.component.css', '/src/styles.css']
 })
 export class TeacherComponent implements OnInit {
   @Input() schoolId: number;

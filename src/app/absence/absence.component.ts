@@ -15,7 +15,7 @@ import { Role } from '../login-page/user';
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, RouterLink],
   templateUrl: './absence.component.html',
-  styleUrl: './absence.component.css'
+  styleUrls: ['./absence.component.css','/src/styles.css']
 })
 export class AbsenceComponent implements OnInit {
   @Input() student: Student;

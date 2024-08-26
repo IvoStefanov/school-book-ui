@@ -2,7 +2,6 @@
     display: flex;
     justify-content: space-between;
     height: 65px;
-    background-color: blanchedalmond;
 }
 
 #userLogout {
@@ -11,8 +10,12 @@
 }
 
 button {
-    font-size: 20px;
-    height: 35px;
-    border: 1px solid rgb(248, 174, 113);
-    background-color: rgb(248, 174, 113);
+    background-color: rgb(223, 100, 0);
+    color: white;
+    padding: 0px 15px;
+    border: none;
+    border-radius: 1rem;
+    height: 40px;
+    margin-top: 12%;
+    font-size: 16px;
 }

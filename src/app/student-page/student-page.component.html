@@ -1,16 +1,18 @@
 <div *ngIf="student">
-    <div>
-      <div>Name: {{ student.name }}</div>
+    <div class="info">
+      <h1>{{ student.name }}</h1>
       <div>Address: {{ student.address }}</div>
       <div>Contact: {{ student.contact }}</div>
       <div>Grade: {{ grades[student.grade] }}</div>
       <app-parent [student]="student"></app-parent>
     </div>
 
+    <span id="school-page-link">School page:<a [routerLink]="'/school/' + student.school.name">{{student.school.name}}</a></span>
+
     <ng-container *ngIf="schedules">
-      <h3>Schedule</h3>
+      <h2>Schedule</h2>
       <div id="schedule-list">
-        <div id="header">
+        <div id="table-header">
           <div>Id</div>
           <div>Subject</div>
           <div>Date</div>
@@ -26,15 +28,15 @@
     </ng-container>
 
     <ng-container *ngIf="subjects && schedules">
-      <h3>Evaluation</h3>
+      <h2>Evaluation</h2>
       <div>
-        <div id="header">
+        <div id="table-header">
           <div>Subject</div>
           <div>Evaluation</div>
           <div>Absences</div>
       </div>
       </div>
-      <ng-container *ngFor="let subject of subjects">
+      <div *ngFor="let subject of subjects" id="evaluation-wrapper">
         <div *ngIf="checkValidSubject(subject)">
           <div>{{ subject }}</div>
           <div>
@@ -44,8 +46,6 @@
             <app-absence [student]="student" [subject]="schoolSubject(subject)"></app-absence>
           </div>
         </div>
-      </ng-container>
+      </div>
     </ng-container>
-
-  <a [routerLink]="'/school/' + student.school.name">School page: {{student.school.name}}</a>
 </div>

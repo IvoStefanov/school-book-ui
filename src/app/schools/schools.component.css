@@ -1,25 +1,80 @@
-#school-wrapper > div{
+#school-wrapper > div {
   display: grid;
   grid-template-columns: 30px 100px 100px 100px 100px;
-  gap: 10px;
+  gap: 10%;
+  font-size: 1.2rem;
+  padding-top: 15px;
 }
 
-#header {
+#school-wrapper:nth-child(2n + 1) {
+  background-color: rgb(255, 231, 201);
+}
+
+#table-header {
   display: grid;
   grid-template-columns: 30px 100px 100px 100px 100px;
-  gap: 10px;
+  gap: 10%;
   font-weight: bold;
   border-bottom: 1px solid black;
+  font-size: 1.4rem;
+  background-color: rgb(255, 194, 144);
+  padding: 10px;
 }
 
 .action-button {
   border: none;
   background-color: transparent;
-  size: 12px;
+}
+
+.delete-button {
+  color: rgb(223, 100, 0);
+}
+
+.add-button {
+  display: flex;
+  align-items: center;
+  color: rgb(223, 100, 0);
+  font-size: 18px;
+}
+
+.text-button {
+  background-color: rgb(223, 100, 0);
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 1rem;
+  font-size: 18px;
+}
+
+.cancel-button {
+  background-color: white;
+  color: rgb(223, 100, 0);
+  border-color: rgb(223, 100, 0);
 }
 
 #edit-school {
   display: flex !important;
   flex-direction: row !important;
   gap: 10px !important;
+}
+
+label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+input {
+  font-size: 18px;
+  padding: 7px;
+  border: none;
+  border-radius: 1rem;
+  background-color: rgb(227, 227, 227);
+}
+
+form {
+  margin-top: 10px;
+}
+
+form > div {
+  margin-bottom: 10px;
 }

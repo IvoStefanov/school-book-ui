@@ -19,7 +19,7 @@ import { Role } from '../login-page/user';
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, RouterLink],
   templateUrl: './schedule.component.html',
-  styleUrl: './schedule.component.css'
+  styleUrls: ['./schedule.component.css', '/src/styles.css']
 })
 export class ScheduleComponent implements OnInit {
   @Input() schoolId: number;

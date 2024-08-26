@@ -1,30 +1,41 @@
 <div *ngIf="school">
-  <h3>{{ school.name }}</h3>
-  <div>{{ school.address }}</div>
-  <div>{{ school.contact }}</div>
-  <div *ngIf="principle">
-    <h3>{{ principle.name }}</h3>
-    <div>{{ principle.address }}</div>
-    <div>{{ principle.contact }}</div>
-    <div>
-      <button *ngIf="userRole === 'Admin' || userRole === 'Principle'" (click)="editPrinciple(principle)" class="action-button"><span class="material-icons">edit</span></button>
-      <button *ngIf="userRole === 'Admin'" (click)="deletePrinciple(school.id)" class="action-button"><span class="material-icons">delete</span></button>
+  <div class="info">
+    <h1>{{ school.name }}</h1>
+    <div>Address: {{ school.address }}</div>
+    <div>Contact: {{ school.contact }}</div>
+
+    <div *ngIf="principle">
+      <h2>{{ principle.name }}</h2>
+      <div>Address: {{ principle.address }}</div>
+      <div>Contact: {{ principle.contact }}</div>
+      <div>
+        <button *ngIf="userRole === 'Admin' || userRole === 'Principle'" (click)="editPrinciple(principle)" class="action-button"><span class="material-icons">edit</span></button>
+        <button *ngIf="userRole === 'Admin'" (click)="deletePrinciple(school.id)" class="action-button delete-button"><span class="material-icons">delete</span></button>
+      </div>
     </div>
   </div>
 
+ 
+
   <div *ngIf="editPrincipleMode" id="edit-principle">
     <form (ngSubmit)="editPrincipleForm(editPrincipleFrom)" #editPrincipleFrom="ngForm">
-      <label>Name: </label>
-      <input name="principleName" required [ngModel]="currentEditPrinciple.name">
-      <br>
-      <label>Address: </label>
-      <input ngModel name="principleAddress" required  [ngModel]="currentEditPrinciple.address">
-      <br>
-      <label>Contact: </label>
-      <input ngModel name="principleContact" required  [ngModel]="currentEditPrinciple.contact">
-
-      <button class="action-button" type="submit" [disabled]="!editPrincipleFrom.valid"><span class="material-icons">check</span></button>
-      <button class="action-button" (click)="editPrincipleMode = false"><span class="material-icons">close</span></button>
+      <div>
+        <label>Name: </label>
+        <input name="principleName" required [ngModel]="currentEditPrinciple.name">
+      </div>
+      <div>
+        <label>Address: </label>
+        <input ngModel name="principleAddress" required  [ngModel]="currentEditPrinciple.address">
+      </div>
+      <div>
+        <label>Contact: </label>
+        <input ngModel name="principleContact" required  [ngModel]="currentEditPrinciple.contact">  
+      </div>
+      <div>
+        <button class="action-button" type="submit" [disabled]="!editPrincipleFrom.valid">Save</button>
+        <button class="action-button" (click)="editPrincipleMode = false">Cancel</button>
+      </div>
+     
     </form>
     <div *ngIf="error">{{ error }}</div>
   </div>
@@ -32,21 +43,27 @@
   <div *ngIf="userRole === 'Admin' && !principle">
     <div *ngIf="error">{{ error }}</div>
     <form (ngSubmit)="createPrinciple(createPrincipleFrom)" #createPrincipleFrom="ngForm">
-      <label>Name: </label>
-      <input ngModel name="principleName" required>
-      <br>
-      <label>Address: </label>
-      <input ngModel name="principleAddress" required>
-      <br>
+      <div>
+        <label>Name: </label>
+        <input ngModel name="principleName" required>
+      </div>
+      <div>
+        <label>Address: </label>
+        <input ngModel name="principleAddress" required>
+      </div>
+     <div>
       <label>Contact: </label>
       <input ngModel name="principleContact" required>
-      <br>
+     </div>
+     <div>
       <label>Username: </label>
       <input ngModel name="principleUsername" required>
-      <br>
-      <label>Password: </label>
-      <input ngModel name="principlePassword" required>
-      <br>
+     </div>
+      <div>
+        <label>Password: </label>
+        <input ngModel name="principlePassword" required>
+      </div>
+      
       <button type="submit" [disabled]="!createPrincipleFrom.valid">Create</button>
     </form>
   </div>

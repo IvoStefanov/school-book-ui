@@ -22,7 +22,7 @@ import { ParentComponent } from "../parent/parent.component";
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, AbsenceComponent, EvaluationComponent, RouterLink, ParentComponent],
   templateUrl: './student-page.component.html',
-  styleUrl: './student-page.component.css'
+  styleUrls: ['./student-page.component.css','/src/styles.css']
 })
 export class StudentPageComponent implements OnInit {
   student: Student;

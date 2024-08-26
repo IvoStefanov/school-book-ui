@@ -1,1 +1,76 @@
 /* You can add global styles to this file, and also import other style files */
+.action-button {
+    border: none;
+    background-color: transparent;
+  }
+  
+  .delete-button {
+    color: rgb(223, 100, 0);
+  }
+  
+  .add-button {
+    display: flex;
+    align-items: center;
+    color: rgb(223, 100, 0);
+    font-size: 18px;
+  }
+  
+  .text-button {
+    background-color: rgb(223, 100, 0);
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 1rem;
+    font-size: 18px;
+    margin: 5px;
+  }
+  
+  .cancel-button {
+    background-color: white;
+    color: rgb(223, 100, 0);
+    border-color: rgb(223, 100, 0);
+  }
+  
+  #edit-school {
+    display: flex !important;
+    flex-direction: row !important;
+    gap: 10px !important;
+  }
+  
+  label {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  input {
+    font-size: 18px;
+    padding: 7px;
+    border: none;
+    border-radius: 1rem;
+    background-color: rgb(227, 227, 227);
+  }
+  
+  form {
+    margin-top: 10px;
+  }
+  
+  form > div {
+    margin-bottom: 10px;
+  }
+
+  .info {
+    font-size: 18px;
+    margin-left: 10px;
+  }
+
+  select {
+    padding: 10px;
+    font-size: 18px;
+    margin: 10px;
+    border: 1px solid rgb(223, 100, 0);
+    border-radius: 1rem;
+}
+
+#school-page-link {
+    font-size: 20px;
+}
