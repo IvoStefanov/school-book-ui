@@ -16,6 +16,8 @@ import { FormsModule } from '@angular/forms';
 import { AbsenceComponent } from '../absence/absence.component';
 import { EvaluationComponent } from '../evaluation/evaluation.component';
 import { ParentComponent } from "../parent/parent.component";
+import { Role } from '../login-page/user';
+import { LoginService } from '../login-page/login-page.service';
 
 @Component({
   selector: 'app-student-page',
@@ -28,14 +30,18 @@ export class StudentPageComponent implements OnInit {
   student: Student;
   schedules: Schedule[];
   error = '';
+  userRole: string;
 
   constructor(
     private scheduleService: ScheduleService,
     private studentService: StudentService,
     private route: ActivatedRoute,
+    private loginService: LoginService
   ) { }
 
   ngOnInit(): void {
+    this.userRole = Role[this.loginService.user.value.role]
+
     this.route.params.pipe(
       switchMap((params: Params) => {
         if (isEmpty(params)) {

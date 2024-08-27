@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Principle } from './school/principle';
 import { Teacher } from './teacher/teacher';
 import { Student } from './student/student';
+import { Parent } from './parent/parent';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,14 @@ export class UserService {
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
     return this.http.get<Student>(
        'http://localhost:3000/student-by-user?user=' + userId,
+       {headers: {"Authorization": "Bearer " + token}}
+    )
+  }
+
+  public getParentByUser(userId: number): Observable<Parent> {
+    const token: string = JSON.parse(localStorage.getItem('userData')).token;
+    return this.http.get<Parent>(
+       'http://localhost:3000/parent-by-user?user=' + userId,
        {headers: {"Authorization": "Bearer " + token}}
     )
   }

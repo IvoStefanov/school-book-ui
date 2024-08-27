@@ -53,7 +53,8 @@ export class LoginPageComponent implements OnInit{
           break;
         }
         case Role.Parent: {
-          //statements;
+          this.userService.getParentByUser(this.user.id).subscribe(parent => this.router.navigate(['parent-profile/' + parent.id]))
+
           break;
         }
         default: {

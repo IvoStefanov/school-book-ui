@@ -35,8 +35,10 @@
       <span>Contact: {{ student.contact }}</span>
     </summary>
     <div>
+      <h3>Evaluation:</h3>
       <app-evaluation [student]="student" [subject]="teacher.subject"></app-evaluation>
       <br>
+      <h3>Absences:</h3>
       <app-absence [student]="student" [subject]="teacher.subject"></app-absence>
     </div>
   </details>

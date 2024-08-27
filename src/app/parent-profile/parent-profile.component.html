@@ -1,1 +1,13 @@
-<p>parent-profile works!</p>
+<div *ngIf="parent">
+    <div class="info">
+        <h1>{{ parent.name }}</h1>
+        <div>Address: {{ parent.address }}</div>
+        <div>Contact: {{ parent.contact }}</div>
+    </div>
+
+    <div *ngFor="let child of children">
+        <h2><a [routerLink]="'/student-page/' + child.id">{{ child.name }}</a></h2>
+    </div>
+
+    <span id="school-page-link">School page:<a [routerLink]="'/school/' + parent.school.name">{{parent.school.name}}</a></span>
+</div>

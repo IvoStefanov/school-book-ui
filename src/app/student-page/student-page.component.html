@@ -4,10 +4,10 @@
       <div>Address: {{ student.address }}</div>
       <div>Contact: {{ student.contact }}</div>
       <div>Grade: {{ grades[student.grade] }}</div>
-      <app-parent [student]="student"></app-parent>
+      <app-parent *ngIf="userRole !== 'Parent'" [student]="student"></app-parent>
     </div>
 
-    <span id="school-page-link">School page:<a [routerLink]="'/school/' + student.school.name">{{student.school.name}}</a></span>
+    <span *ngIf="userRole !== 'Parent'" id="school-page-link">School page:<a [routerLink]="'/school/' + student.school.name">{{student.school.name}}</a></span>
 
     <ng-container *ngIf="schedules">
       <h2>Schedule</h2>
@@ -28,7 +28,7 @@
     </ng-container>
 
     <ng-container *ngIf="subjects && schedules">
-      <h2>Evaluation</h2>
+      <h2>Evaluation and Absences</h2>
       <div>
         <div id="table-header">
           <div>Subject</div>

@@ -17,23 +17,20 @@ export class StudentService {
        'http://localhost:3000/students?school=' + schoolId,
        {headers: {"Authorization": "Bearer " + token}}
     )
-    // .pipe(
-    // //  catchError(this.handleError),
-    //   switchMap(res =>
-    //     res.map(school => {
-    //       id: school.id;
-    //       name: school.name;
-    //       address: school.address;
-    //       contact: school.contact
-    //     })
-    //   )
-    // )
   }
 
   public getStudentsByGrade(grade: Grade): Observable<Student[]> {
     const token: string = JSON.parse(localStorage.getItem('userData')).token;
     return this.http.get<Student[]>(
        'http://localhost:3000/students?grade=' + grade,
+       {headers: {"Authorization": "Bearer " + token}}
+    )
+  }
+
+  public getStudentsByParent(parentId: number): Observable<Student[]> {
+    const token: string = JSON.parse(localStorage.getItem('userData')).token;
+    return this.http.get<Student[]>(
+       'http://localhost:3000/students-by-parent?parentId=' + parentId,
        {headers: {"Authorization": "Bearer " + token}}
     )
   }

@@ -1,5 +1,4 @@
-<h3>Evaluation: </h3>
-<div id="no-evaluation" *ngIf="!marks.length">No marks yet!</div>
+<div id="no-evaluation" *ngIf="!marks.length">No marks!</div>
 <div *ngIf="marks.length">{{showMarks()}}</div>
 <form *ngIf="editEvaluationMode && !marks.length" (ngSubmit)="editEvaluationForm(editEvaluationFrom)" #editEvaluationFrom="ngForm">
   <input name="editEvaluationMark" required [ngModel]="marks">
