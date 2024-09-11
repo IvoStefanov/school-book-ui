@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpHeaderResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TeacherService } from '../teacher/teacher.service';
@@ -19,11 +19,12 @@ import { Date } from '../enums/date';
 import { SchoolSubject } from '../enums/subjects';
 import { EvaluationComponent } from "../evaluation/evaluation.component";
 import { AbsenceComponent } from "../absence/absence.component";
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-teacher-profile',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, ScheduleComponent, StudentComponent, EvaluationComponent, AbsenceComponent, RouterLink],
+  imports: [CommonModule, FormsModule, HttpClientModule, ScheduleComponent, StudentComponent, EvaluationComponent, AbsenceComponent, RouterLink, HeaderComponent],
   templateUrl: './teacher-profile.component.html',
   styleUrls: ['./teacher-profile.component.css', '/src/styles.css']
 })

@@ -1,0 +1,6 @@
+<ng-container *ngIf="loginService.user | async as user">
+  <app-header></app-header>
+  <ng-container *ngIf="user.role === role.Admin">
+    <app-schools></app-schools>
+  </ng-container>
+</ng-container>

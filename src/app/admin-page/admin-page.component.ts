@@ -3,23 +3,20 @@ import { LoginService } from '../login-page/login-page.service';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { Role } from '../login-page/user';
-import { AdminComponent } from '../admin/admin.component';
+import { HeaderComponent } from "../header/header.component";
+import { SchoolsComponent } from '../schools/schools.component';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-admin-page',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, AdminComponent],
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.css'
+  imports: [RouterOutlet, CommonModule, HeaderComponent, SchoolsComponent],
+  templateUrl: './admin-page.component.html',
+  styleUrl: './admin-page.component.css'
 })
-export class HomePageComponent {
+export class AdminPageComponent {
   public username = '';
 
   constructor(public loginService: LoginService) {}
-
-  public logout(): void {
-    this.loginService.logout();
-  }
 
   public get role(): typeof Role {
     return Role;

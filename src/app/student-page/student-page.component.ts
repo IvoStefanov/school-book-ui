@@ -18,11 +18,12 @@ import { EvaluationComponent } from '../evaluation/evaluation.component';
 import { ParentComponent } from "../parent/parent.component";
 import { Role } from '../login-page/user';
 import { LoginService } from '../login-page/login-page.service';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-student-page',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, AbsenceComponent, EvaluationComponent, RouterLink, ParentComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule, AbsenceComponent, EvaluationComponent, RouterLink, ParentComponent, HeaderComponent],
   templateUrl: './student-page.component.html',
   styleUrls: ['./student-page.component.css','/src/styles.css']
 })

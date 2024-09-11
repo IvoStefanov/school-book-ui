@@ -4,16 +4,15 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { LoginService } from './login-page.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { HomePageComponent } from '../home-page/home-page.component';
+import { AdminPageComponent } from '../admin-page/admin-page.component';
 import { Role, User } from './user';
 import { UserService } from '../user.service';
-import { switchMap } from 'rxjs';
 import { SchoolsService } from '../schools/schools.service';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, CommonModule, HomePageComponent],
+  imports: [FormsModule, HttpClientModule, CommonModule, AdminPageComponent],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css'
 })
@@ -37,7 +36,7 @@ export class LoginPageComponent implements OnInit{
       this.user = res;
       switch(this.user.role) {
         case Role.Admin: {
-          this.router.navigate(['/home']);
+          this.router.navigate(['/admin-page']);
           break;
         }
         case Role.Principle: {

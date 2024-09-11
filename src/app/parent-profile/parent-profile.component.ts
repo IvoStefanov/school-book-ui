@@ -11,11 +11,12 @@ import { ParentService } from './parent.service';
 import { StudentService } from '../student/student.service';
 import { isEmpty } from 'lodash';
 import { of, switchMap } from 'rxjs';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-parent-profile',
   standalone: true,
-  imports: [StudentComponent, StudentPageComponent, CommonModule, FormsModule, HttpClientModule, RouterLink],
+  imports: [StudentComponent, StudentPageComponent, CommonModule, FormsModule, HttpClientModule, RouterLink, HeaderComponent],
   templateUrl: './parent-profile.component.html',
   styleUrls: ['./parent-profile.component.css', '/src/styles.css']
 })

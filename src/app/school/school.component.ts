@@ -15,11 +15,12 @@ import { TeacherComponent } from '../teacher/teacher.component';
 import { StudentComponent } from '../student/student.component';
 import { ScheduleComponent } from "../schedule/schedule.component";
 import { LoginService } from '../login-page/login-page.service';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-school',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule, RouterLink, TeacherComponent, StudentComponent, ScheduleComponent],
+  imports: [CommonModule, FormsModule, HttpClientModule, RouterLink, TeacherComponent, StudentComponent, ScheduleComponent, HeaderComponent],
   templateUrl: './school.component.html',
   styleUrl: './school.component.css'
 })
